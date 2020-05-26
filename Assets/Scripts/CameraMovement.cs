@@ -15,9 +15,13 @@ public class CameraMovement : MonoBehaviour
     private Vector3 lastMousePos;
     private Vector3 currentMousePos;
     private Vector3 swipeInput;
+
+    private int screenWidth;
+
     private void Start()
     {
         offset = new Vector3(tree.position.x, tree.position.y, tree.position.z - 5);
+        screenWidth = Screen.width;
     }
 
     void Update()
@@ -56,7 +60,7 @@ public class CameraMovement : MonoBehaviour
             else 
             {
                 // If touch is neither began nor finished, it's in progress
-                swipeInput = touch.deltaPosition;
+                swipeInput = touch.deltaPosition / screenWidth * 10;
             }
         }
     }
