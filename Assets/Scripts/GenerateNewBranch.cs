@@ -5,11 +5,16 @@ using UnityEngine;
 public class GenerateNewBranch : MonoBehaviour
 {
     public GameObject branch;
+    private CameraController cameraController;
 
     private int subBranches = 0;
     private int subBranchesLimit = 1;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && subBranches < subBranchesLimit)
@@ -21,6 +26,10 @@ public class GenerateNewBranch : MonoBehaviour
     private void GenerateBranch()
     {
         subBranches++;
-        Instantiate(branch, transform.position + Vector3.up, transform.rotation);
+        
+        Instantiate(branch, transform.position + Vector3.up, transform.rotation)
+            .transform.parent = transform.parent;
+
+        cameraController.ShowWholeTree();
     }
 }

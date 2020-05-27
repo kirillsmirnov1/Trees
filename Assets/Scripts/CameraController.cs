@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public float turnSpeed;
     public GameObject tree;
@@ -17,13 +17,21 @@ public class CameraMovement : MonoBehaviour
     private Vector3 swipeInput;
 
     Bounds bounds;
+    private float lastBoundsHeight;
 
     private int screenWidth;
+    private Vector3 lookAtMe;
 
     private void Start()
     {
         offset = new Vector3(tree.transform.position.x, tree.transform.position.y, tree.transform.position.z - 5);
         screenWidth = Screen.width;
+
+        ShowWholeTree();
+    }
+
+    public void ShowWholeTree()
+    {
         EncapsulateTree();
         MoveCameraToShowWholeTree();
     }
@@ -37,12 +45,20 @@ public class CameraMovement : MonoBehaviour
         offset = Quaternion.AngleAxis(horizontalInput * turnSpeed, Vector3.up) * offset;
 
         transform.position = tree.transform.position + offset;
-        transform.LookAt(tree.transform.position);
+        transform.LookAt(lookAtMe);
     }
 
     private void MoveCameraToShowWholeTree()
     {
+        if (lastBoundsHeight > 0)
+        {
+            float offsetK = bounds.size.y / lastBoundsHeight;
+            Debug.Log("offsetK: " + offsetK);
+            offset *= offsetK;
+        }
+
         offset = new Vector3(offset.x, bounds.center.y, offset.z);
+
         Debug.Log("Bounds.center.y: " + bounds.center.y);
     }
 
@@ -106,6 +122,10 @@ public class CameraMovement : MonoBehaviour
 
     private void EncapsulateTree()
     {
+        if (bounds != null)
+        {
+            lastBoundsHeight = bounds.size.y;
+        }
         bounds = new Bounds(tree.transform.position, Vector3.zero);
 
         foreach (Renderer r in tree.GetComponentsInChildren<Renderer>())
@@ -113,5 +133,7 @@ public class CameraMovement : MonoBehaviour
             Debug.Log("Encapsulating!");
             bounds.Encapsulate(r.bounds);
         }
+
+        lookAtMe = bounds.center;
     }
 }
