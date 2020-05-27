@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public float turnSpeed;
-    public Transform tree;
+    public GameObject tree;
 
     // Camera position
     private Vector3 offset;
@@ -16,12 +16,16 @@ public class CameraMovement : MonoBehaviour
     private Vector3 currentMousePos;
     private Vector3 swipeInput;
 
+    Bounds bounds;
+
     private int screenWidth;
 
     private void Start()
     {
-        offset = new Vector3(tree.position.x, tree.position.y, tree.position.z - 5);
+        offset = new Vector3(tree.transform.position.x, tree.transform.position.y, tree.transform.position.z - 5);
         screenWidth = Screen.width;
+        EncapsulateTree();
+        MoveCameraToShowWholeTree();
     }
 
     void Update()
@@ -32,8 +36,14 @@ public class CameraMovement : MonoBehaviour
 
         offset = Quaternion.AngleAxis(horizontalInput * turnSpeed, Vector3.up) * offset;
 
-        transform.position = tree.position + offset;
-        transform.LookAt(tree.position);
+        transform.position = tree.transform.position + offset;
+        transform.LookAt(tree.transform.position);
+    }
+
+    private void MoveCameraToShowWholeTree()
+    {
+        offset = new Vector3(offset.x, bounds.center.y, offset.z);
+        Debug.Log("Bounds.center.y: " + bounds.center.y);
     }
 
     private void HandleSwipeInput()
@@ -91,6 +101,17 @@ public class CameraMovement : MonoBehaviour
         {
             swipeInput = currentMousePos - lastMousePos;
             lastMousePos = currentMousePos;
+        }
+    }
+
+    private void EncapsulateTree()
+    {
+        bounds = new Bounds(tree.transform.position, Vector3.zero);
+
+        foreach (Renderer r in tree.GetComponentsInChildren<Renderer>())
+        {
+            Debug.Log("Encapsulating!");
+            bounds.Encapsulate(r.bounds);
         }
     }
 }
