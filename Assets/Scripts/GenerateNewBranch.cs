@@ -26,9 +26,11 @@ public class GenerateNewBranch : MonoBehaviour
     private void GenerateBranch()
     {
         subBranches++;
-        
-        Instantiate(branch, transform.position + Vector3.up, transform.rotation)
-            .transform.parent = transform.parent;
+
+        Transform head = transform.Find("Head");
+
+        Instantiate(branch, head.position, transform.rotation)
+            .transform.parent = transform;
 
         cameraController.ShowWholeTree();
     }
