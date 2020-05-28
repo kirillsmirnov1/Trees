@@ -8,7 +8,9 @@ public class GenerateNewBranch : MonoBehaviour
     private CameraController cameraController;
 
     private int subBranches = 0;
-    private int subBranchesLimit = 1;
+    private int subBranchesLimit = 4;
+
+    public float rotationMax = 70;
 
     private void Start()
     {
@@ -23,15 +25,24 @@ public class GenerateNewBranch : MonoBehaviour
         }
     }
 
-    private void GenerateBranch()
+    private void GenerateBranch() // TODO pass generating impulse from root to limit recursion
     {
         subBranches++;
 
-        Transform head = transform.Find("Head");
+        if (Random.Range(0, 1) == 0)
+        {
+            Transform head = transform.Find("Head");
 
-        Instantiate(branch, head.position, transform.rotation)
-            .transform.parent = transform;
+            Quaternion rotation = Quaternion.Euler(
+                transform.rotation.eulerAngles
+                + Vector3.right * Random.Range(-rotationMax, rotationMax) // TODO [-1 or 1] * Random(30, 70)
+                + Vector3.forward * Random.Range(-rotationMax, rotationMax)
+                );
 
-        cameraController.ShowWholeTree();
+            Instantiate(branch, head.position, rotation)
+                .transform.parent = transform;
+
+            cameraController.ShowWholeTree();
+        }
     }
 }
