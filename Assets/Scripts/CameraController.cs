@@ -6,7 +6,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float turnSpeed;
-    public GameObject tree;
     public Transform lookAtMePoint;
 
     private bool movingCamera;
@@ -15,22 +14,18 @@ public class CameraController : MonoBehaviour
     private Vector3 currentMousePos;
     private Vector3 swipeInput;
 
-    Bounds bounds;
-    private float lastBoundsHeight;
-
     private int screenWidth;
 
     private void Start()
     {
         screenWidth = Screen.width;
 
-        ShowWholeTree();
+        ShowWholeTree(0, 1);
     }
 
-    public void ShowWholeTree()
+    public void ShowWholeTree(float center, float treeHeight)
     {
-        EncapsulateTree();
-        MoveCameraToShowWholeTree();
+        MoveCameraToShowWholeTree(center, treeHeight);
     }
 
     void Update()
@@ -38,18 +33,12 @@ public class CameraController : MonoBehaviour
         HandleSwipeInput();
     }
 
-    private void MoveCameraToShowWholeTree()
+    private void MoveCameraToShowWholeTree(float center, float treeHeight)
     {
-        if (lastBoundsHeight > 0)
-        {
-            float offsetK = bounds.size.y / lastBoundsHeight;
-            Debug.Log("offsetK: " + offsetK);
-            transform.localPosition *= offsetK;
-        }
+        // FIXME still not the best way
+        transform.localPosition = transform.localPosition.normalized * treeHeight * 2f;
 
-        lookAtMePoint.position = Vector3.up * bounds.center.y;
-
-        Debug.Log("Bounds.center.y: " + bounds.center.y);
+        lookAtMePoint.position = Vector3.up * center;
     }
 
     private void HandleSwipeInput()
@@ -110,25 +99,6 @@ public class CameraController : MonoBehaviour
         {
             swipeInput = currentMousePos - lastMousePos;
             lastMousePos = currentMousePos;
-        }
-    }
-
-    // FIXME why camera encapsulates tree?
-    private void EncapsulateTree()
-    {
-        if (bounds != null)
-        {
-            lastBoundsHeight = bounds.size.y;
-        }
-
-        bounds = new Bounds(tree.transform.position, Vector3.zero); 
-        
-        Debug.Log("Encapsulating!");
-        
-        // FIXME that is one fine overkill
-        foreach (Renderer r in tree.GetComponentsInChildren<Renderer>())
-        {
-            bounds.Encapsulate(r.bounds);
         }
     }
 }

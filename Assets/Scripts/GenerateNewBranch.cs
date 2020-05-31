@@ -5,18 +5,17 @@ using UnityEngine;
 public class GenerateNewBranch : MonoBehaviour
 {
     public GameObject branch;
-    private CameraController cameraController;
+    private TreeController treeController;
 
     private int subBranches = 0;
     private int subBranchesLimit = 4;
 
     public float rotationMax = 70;
 
-    private static int branchesInGeneration = 0;
-
     private void Start()
     {
-        cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
+        treeController = GameObject.Find("Tree").GetComponent<TreeController>();
+        treeController.CheckNewBranchHeight(transform.position.y);
     }
 
     void Update()
@@ -33,8 +32,6 @@ public class GenerateNewBranch : MonoBehaviour
 
         if (Random.Range(0, 1) == 0)
         {
-            branchesInGeneration++;
-
             Transform head = transform.Find("Head");
 
             Quaternion rotation = Quaternion.Euler(
@@ -45,12 +42,6 @@ public class GenerateNewBranch : MonoBehaviour
 
             Instantiate(branch, head.position, rotation)
                 .transform.parent = transform;
-
-            branchesInGeneration--;
-            if(branchesInGeneration == 0)
-            {
-                cameraController.ShowWholeTree(); // FIXME not the best way to do it
-            }
         }
     }
 }
