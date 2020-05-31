@@ -12,6 +12,8 @@ public class GenerateNewBranch : MonoBehaviour
 
     public float rotationMax = 70;
 
+    private static int branchesInGeneration = 0;
+
     private void Start()
     {
         cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
@@ -31,6 +33,8 @@ public class GenerateNewBranch : MonoBehaviour
 
         if (Random.Range(0, 1) == 0)
         {
+            branchesInGeneration++;
+
             Transform head = transform.Find("Head");
 
             Quaternion rotation = Quaternion.Euler(
@@ -42,7 +46,11 @@ public class GenerateNewBranch : MonoBehaviour
             Instantiate(branch, head.position, rotation)
                 .transform.parent = transform;
 
-            cameraController.ShowWholeTree();
+            branchesInGeneration--;
+            if(branchesInGeneration == 0)
+            {
+                cameraController.ShowWholeTree(); // FIXME not the best way to do it
+            }
         }
     }
 }

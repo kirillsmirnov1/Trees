@@ -113,6 +113,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // FIXME why camera encapsulates tree?
     private void EncapsulateTree()
     {
         if (bounds != null)
@@ -122,10 +123,11 @@ public class CameraController : MonoBehaviour
 
         bounds = new Bounds(tree.transform.position, Vector3.zero); 
         
+        Debug.Log("Encapsulating!");
+        
         // FIXME that is one fine overkill
         foreach (Renderer r in tree.GetComponentsInChildren<Renderer>())
         {
-            Debug.Log("Encapsulating!");
             bounds.Encapsulate(r.bounds);
         }
     }
