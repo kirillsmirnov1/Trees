@@ -7,9 +7,8 @@ public class CameraController : MonoBehaviour
 {
     public float turnSpeed;
     public GameObject tree;
+    public Transform lookAtMePoint;
 
-    // Camera position
-    private Vector3 offset;
     private bool movingCamera;
 
     private Vector3 lastMousePos;
@@ -20,11 +19,9 @@ public class CameraController : MonoBehaviour
     private float lastBoundsHeight;
 
     private int screenWidth;
-    private Vector3 lookAtMe;
 
     private void Start()
     {
-        offset = new Vector3(tree.transform.position.x, tree.transform.position.y, tree.transform.position.z - 5);
         screenWidth = Screen.width;
 
         ShowWholeTree();
@@ -39,13 +36,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         HandleSwipeInput();
-
-        float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
-
-        offset = Quaternion.AngleAxis(horizontalInput * turnSpeed, Vector3.up) * offset;
-
-        transform.position = tree.transform.position + offset;
-        transform.LookAt(lookAtMe);
     }
 
     private void MoveCameraToShowWholeTree()
@@ -54,10 +44,10 @@ public class CameraController : MonoBehaviour
         {
             float offsetK = bounds.size.y / lastBoundsHeight;
             Debug.Log("offsetK: " + offsetK);
-            offset *= offsetK;
+            transform.localPosition *= offsetK;
         }
 
-        offset = new Vector3(offset.x, bounds.center.y, offset.z);
+        lookAtMePoint.position = Vector3.up * bounds.center.y;
 
         Debug.Log("Bounds.center.y: " + bounds.center.y);
     }
@@ -66,6 +56,9 @@ public class CameraController : MonoBehaviour
     {
         HandleMouseSwipeInput();
         HandleScreenTouchScreenSwipeInput();
+
+        float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
+        lookAtMePoint.rotation = Quaternion.Euler(lookAtMePoint.rotation.eulerAngles + Vector3.up * horizontalInput * turnSpeed);
     }
 
     private void HandleScreenTouchScreenSwipeInput()
@@ -126,14 +119,14 @@ public class CameraController : MonoBehaviour
         {
             lastBoundsHeight = bounds.size.y;
         }
-        bounds = new Bounds(tree.transform.position, Vector3.zero);
 
+        bounds = new Bounds(tree.transform.position, Vector3.zero); 
+        
+        // FIXME that is one fine overkill
         foreach (Renderer r in tree.GetComponentsInChildren<Renderer>())
         {
             Debug.Log("Encapsulating!");
             bounds.Encapsulate(r.bounds);
         }
-
-        lookAtMe = bounds.center;
     }
 }
