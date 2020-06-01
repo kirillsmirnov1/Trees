@@ -65,7 +65,10 @@ public class CameraController : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
 
-        lookAtMePoint.Rotate(Vector3.up * (horizontalInput + (isAutorotateEnabled ? autoRotateSpeed : 0)) * turnSpeed);
+        bool shouldAutoRotate = isAutorotateEnabled && horizontalInput == 0;
+        float resultingAutorotation = shouldAutoRotate ? autoRotateSpeed : 0;
+
+        lookAtMePoint.Rotate(Vector3.up * (horizontalInput + resultingAutorotation) * turnSpeed);
     }
 
     private void HandleScreenTouchScreenSwipeInput()
