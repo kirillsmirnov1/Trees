@@ -8,6 +8,7 @@ public class GenerateNewBranch : MonoBehaviour
     private TreeController treeController;
 
     private int subBranches = 0;
+    private float showDebugRays = 10f;
 
     public float rotationMax = 70;
 
@@ -15,6 +16,15 @@ public class GenerateNewBranch : MonoBehaviour
     {
         treeController = GameObject.Find("Tree").GetComponent<TreeController>();
         treeController.CheckNewBranchHeight(transform.position.y);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        // FIXME want to check if branch intersects with smth rn, but that doesn't work as expected
+        if(collision.gameObject.transform != transform.parent)
+        {
+            Debug.Log("Non parent collision");
+        }
     }
 
     void Update()
@@ -39,9 +49,24 @@ public class GenerateNewBranch : MonoBehaviour
                 + Vector3.forward * Random.Range(-rotationMax, rotationMax)
                 );
 
-            GameObject subBranch = Instantiate(branch, head.position, rotation);
-            subBranch.transform.parent = transform;
-            subBranch.transform.localScale = treeController.scaleModificator * Vector3.one;
+            if (NoIntersections(head.position, rotation * Vector3.up))
+            {
+                GameObject subBranch = Instantiate(branch, head.position, rotation);
+                subBranch.transform.parent = transform;
+                subBranch.transform.localScale = treeController.scaleModificator * Vector3.one;
+            }
         }
+    }
+
+    private bool NoIntersections(Vector3 origin, Vector3 direction)
+    {
+        Ray ray = new Ray(origin, direction);
+        
+        float maxDistance = (transform.Find("Head").position - transform.Find("Tail").position)
+            .magnitude / treeController.scaleModificator;
+
+        Debug.DrawRay(origin, direction * maxDistance, Color.red, showDebugRays, false);
+
+        return !Physics.Raycast(ray, maxDistance);
     }
 }
