@@ -55,7 +55,8 @@ public class CameraController : MonoBehaviour
         HandleScreenTouchScreenSwipeInput();
 
         float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
-        lookAtMePoint.rotation = Quaternion.Euler(lookAtMePoint.rotation.eulerAngles + Vector3.up * horizontalInput * turnSpeed);
+
+        lookAtMePoint.Rotate(Vector3.up * horizontalInput * turnSpeed);
     }
 
     private void HandleScreenTouchScreenSwipeInput()
