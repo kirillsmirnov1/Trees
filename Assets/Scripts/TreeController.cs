@@ -7,6 +7,8 @@ public class TreeController : MonoBehaviour
     public float minY { get; private set; } = 0;
     public float maxY { get; private set; } = 0;
 
+    public int subBranchesLimit = 4;
+
     private CameraController cameraController;
 
     // Start is called before the first frame update

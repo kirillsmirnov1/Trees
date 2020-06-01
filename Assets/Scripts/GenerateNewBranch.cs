@@ -8,7 +8,6 @@ public class GenerateNewBranch : MonoBehaviour
     private TreeController treeController;
 
     private int subBranches = 0;
-    private int subBranchesLimit = 4;
 
     public float rotationMax = 70;
 
@@ -20,7 +19,7 @@ public class GenerateNewBranch : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && subBranches < subBranchesLimit)
+        if(Input.GetKeyDown(KeyCode.Space) && subBranches < treeController.subBranchesLimit)
         {
             GenerateBranch();
         }
@@ -30,7 +29,7 @@ public class GenerateNewBranch : MonoBehaviour
     {
         subBranches++;
 
-        if (Random.Range(0, 1) == 0)
+        if (Random.Range(0, 2) == 0)
         {
             Transform head = transform.Find("Head");
 
