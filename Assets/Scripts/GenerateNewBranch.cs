@@ -39,8 +39,9 @@ public class GenerateNewBranch : MonoBehaviour
                 + Vector3.forward * Random.Range(-rotationMax, rotationMax)
                 );
 
-            Instantiate(branch, head.position, rotation)
-                .transform.parent = transform;
+            GameObject subBranch = Instantiate(branch, head.position, rotation);
+            subBranch.transform.parent = transform;
+            subBranch.transform.localScale = treeController.scaleModificator * Vector3.one;
         }
     }
 }

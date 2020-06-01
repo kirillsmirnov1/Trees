@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4cfd0d5291f8f40bbb14acca47573c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subBranchesLimit: 4
+  scaleModificator: 0.9
 --- !u!1001 &189587482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,6 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 5
   lookAtMePoint: {fileID: 1777168721}
+  verticalOffset: 1.5
+  verticalModifier: 1.5
 --- !u!1 &972737579
 GameObject:
   m_ObjectHideFlags: 0

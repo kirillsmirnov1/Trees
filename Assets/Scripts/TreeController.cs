@@ -8,6 +8,7 @@ public class TreeController : MonoBehaviour
     public float maxY { get; private set; } = 0;
 
     public int subBranchesLimit = 4;
+    public float scaleModificator = 0.5f;
 
     private CameraController cameraController;
 
