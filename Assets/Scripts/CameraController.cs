@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     public float verticalOffset = 1.5f;
     public float verticalModifier = 2.5f; // TODO add user control: wheel+pinch
 
+    public float autoRotateSpeed = 0.25f;
+
     private bool movingCamera;
 
     private float lastTreeCenter;
@@ -21,6 +23,8 @@ public class CameraController : MonoBehaviour
     private Vector3 swipeInput;
 
     private int screenWidth;
+
+    private bool isAutorotateEnabled = true;
 
     private void Start()
     {
@@ -40,6 +44,11 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         HandleSwipeInput();
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            isAutorotateEnabled = !isAutorotateEnabled;
+        }
     }
 
     public void MoveCameraToShowWholeTree()
@@ -56,7 +65,7 @@ public class CameraController : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
 
-        lookAtMePoint.Rotate(Vector3.up * horizontalInput * turnSpeed);
+        lookAtMePoint.Rotate(Vector3.up * (horizontalInput + (isAutorotateEnabled ? autoRotateSpeed : 0)) * turnSpeed);
     }
 
     private void HandleScreenTouchScreenSwipeInput()
