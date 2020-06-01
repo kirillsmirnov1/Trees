@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateNewBranch : MonoBehaviour
+public class BranchController : MonoBehaviour
 {
     public GameObject branch;
     private TreeController treeController;
