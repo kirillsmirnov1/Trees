@@ -65,8 +65,12 @@ public class GenerateNewBranch : MonoBehaviour
         float maxDistance = (transform.Find("Head").position - transform.Find("Tail").position)
             .magnitude / treeController.scaleModificator;
 
-        Debug.DrawRay(origin, direction * maxDistance, Color.red, showDebugRays, false);
+        bool rayHitSmth = Physics.Raycast(ray, maxDistance);
 
-        return !Physics.Raycast(ray, maxDistance);
+        Debug.DrawRay(origin, direction * maxDistance, 
+            rayHitSmth ? Color.red : Color.green, 
+            showDebugRays, false);
+
+        return !rayHitSmth;
     }
 }
