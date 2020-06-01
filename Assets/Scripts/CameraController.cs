@@ -8,7 +8,13 @@ public class CameraController : MonoBehaviour
     public float turnSpeed;
     public Transform lookAtMePoint;
 
+    public float verticalOffset = 1.5f;
+    public float verticalModifier = 2.5f; // TODO add user control: wheel+pinch
+
     private bool movingCamera;
+
+    private float lastTreeCenter;
+    private float lastTreeHeight;
 
     private Vector3 lastMousePos;
     private Vector3 currentMousePos;
@@ -25,7 +31,10 @@ public class CameraController : MonoBehaviour
 
     public void ShowWholeTree(float center, float treeHeight)
     {
-        MoveCameraToShowWholeTree(center, treeHeight);
+        lastTreeCenter = center;
+        lastTreeHeight = treeHeight;
+
+        MoveCameraToShowWholeTree();
     }
 
     void Update()
@@ -33,12 +42,11 @@ public class CameraController : MonoBehaviour
         HandleSwipeInput();
     }
 
-    private void MoveCameraToShowWholeTree(float center, float treeHeight)
+    public void MoveCameraToShowWholeTree()
     {
-        // FIXME still not the best way
-        transform.localPosition = transform.localPosition.normalized * treeHeight * 2f;
+        transform.localPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * verticalModifier;
 
-        lookAtMePoint.position = Vector3.up * center;
+        lookAtMePoint.position = Vector3.up * lastTreeCenter;
     }
 
     private void HandleSwipeInput()
