@@ -40,7 +40,7 @@ public class TreeController : MonoBehaviour
         }
     }
 
-    private void GenerateNewBranches()
+    public void GenerateNewBranches()
     {
         if(branches.Count == 0)
         {
@@ -76,7 +76,7 @@ public class TreeController : MonoBehaviour
         }
     }
 
-    public void GenerateBranch(BranchController parentBranch, out BranchController newBranch, out bool canBranchGenerateMore)
+    private void GenerateBranch(BranchController parentBranch, out BranchController newBranch, out bool canBranchGenerateMore)
     {
         parentBranch.subBranches++;
 
