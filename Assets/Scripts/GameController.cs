@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     private CameraController cameraController;
+    public float showDebugRaysSeconds = 10f;
 
     void Start()
     {
