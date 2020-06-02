@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,20 +11,44 @@ public class TreeController : MonoBehaviour
     public float subBranchScaleModificator;
 
     public TextMeshProUGUI branchesCounterText;
+    public GameObject branch;
 
     private CameraController cameraController;
     private int numberOfBranches = 0;
+
+    private List<BranchController> branches = new List<BranchController>();
 
     // Start is called before the first frame update
     void Start()
     {
         cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GenerateNewBranches();
+        }
+    }
+
+    private void GenerateNewBranches()
+    {
+        if(branches.Count == 0)
+        {
+            GenerateFirstBranch();
+        }
+        else
+        {
+            Debug.Log("TODO: generate other branches");
+        }
+    }
+
+    private void GenerateFirstBranch()
+    {
+        branches.Add(Instantiate(branch, transform).GetComponent<BranchController>());
     }
 
     public void CheckNewBranchHeight(float y)

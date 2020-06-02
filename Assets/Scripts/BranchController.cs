@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BranchController : MonoBehaviour
 {
@@ -29,10 +27,10 @@ public class BranchController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && subBranches < treeController.subBranchesPerBranchLimit)
-        {
-            GenerateBranch();
-        }
+        //if(Input.GetKeyDown(KeyCode.Space) && subBranches < treeController.subBranchesPerBranchLimit)
+        //{
+        //    GenerateBranch();
+        //}
     }
 
     private void GenerateBranch() // TODO pass generating impulse from root to limit recursion
