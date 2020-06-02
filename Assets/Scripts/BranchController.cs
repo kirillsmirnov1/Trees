@@ -29,7 +29,7 @@ public class BranchController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && subBranches < treeController.subBranchesLimit)
+        if(Input.GetKeyDown(KeyCode.Space) && subBranches < treeController.subBranchesPerBranchLimit)
         {
             GenerateBranch();
         }
@@ -53,7 +53,7 @@ public class BranchController : MonoBehaviour
             {
                 GameObject subBranch = Instantiate(branch, head.position, rotation);
                 subBranch.transform.parent = transform;
-                subBranch.transform.localScale = treeController.scaleModificator * Vector3.one;
+                subBranch.transform.localScale = treeController.subBranchScaleModificator * Vector3.one;
             }
         }
     }
@@ -63,7 +63,7 @@ public class BranchController : MonoBehaviour
         Ray ray = new Ray(origin, direction);
         
         float maxDistance = (transform.Find("Head").position - transform.Find("Tail").position)
-            .magnitude / treeController.scaleModificator;
+            .magnitude / treeController.subBranchScaleModificator;
 
         bool rayHitSmth = Physics.Raycast(ray, maxDistance);
 

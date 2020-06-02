@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class TreeController : MonoBehaviour
 {
-    public float minY { get; private set; } = 0;
-    public float maxY { get; private set; } = 0;
+    public float lowestTreeY { get; private set; } = 0;
+    public float highestTreeY { get; private set; } = 0;
 
-    public int subBranchesLimit = 4;
-    public float scaleModificator = 0.5f;
+    public int subBranchesPerBranchLimit;
+    public float subBranchScaleModificator;
 
-    public TextMeshProUGUI branchesText;
+    public TextMeshProUGUI branchesCounterText;
 
     private CameraController cameraController;
-    private int branches = 0;
+    private int numberOfBranches = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,30 +30,30 @@ public class TreeController : MonoBehaviour
 
     public void CheckNewBranchHeight(float y)
     {
-        branches++;
+        numberOfBranches++;
         UpdateBranchesText();
 
         bool centerMoved = false;
 
-        if(y < minY)
+        if(y < lowestTreeY)
         {
-            minY = y;
+            lowestTreeY = y;
             centerMoved = true;
         } 
-        else if(y > maxY)
+        else if(y > highestTreeY)
         {
-            maxY = y;
+            highestTreeY = y;
             centerMoved = true;
         }
 
         if (centerMoved)
         {
-            cameraController.ShowWholeTree((maxY + minY)/2f, maxY - minY);
+            cameraController.ShowWholeTree((highestTreeY + lowestTreeY)/2f, highestTreeY - lowestTreeY);
         }
     }
 
     private void UpdateBranchesText()
     {
-        branchesText.text = "Branches: " + branches;
+        branchesCounterText.text = "Branches: " + numberOfBranches;
     }
 }
