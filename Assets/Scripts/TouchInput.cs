@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoRotationCapsuleController : MonoBehaviour
+public class TouchInput : MonoBehaviour
 {
-    private CameraController cameraController;
-
-    void Start()
-    {
-        cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
-    }
-
     void Update()
     {
-        #if (UNITY_IOS || UNITY_ANDROID)
-            CatchTouch();
-        #endif
+#if (UNITY_IOS || UNITY_ANDROID)
+        CatchTouch();
+#endif
     }
 
     private void CatchTouch()
@@ -28,14 +21,9 @@ public class AutoRotationCapsuleController : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    hit.transform.gameObject.SendMessage("OnMouseDown");
+                    hit.transform.gameObject.SendMessage("OnTouchDown");
                 }
             }
         }
-    }
-
-    private void OnMouseDown()
-    {
-        cameraController.FlipRotationFlag();
     }
 }
