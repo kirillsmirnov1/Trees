@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private float zoomOffset = 0f;
 
-    public float autoRotateSpeed = 0.25f;
+    public float cameraMovementSpeed = 0.25f;
 
     private bool movingCamera;
 
@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
     {
         while((movingTransform.position - destination).magnitude > 0)
         {
-            movingTransform.position = Vector3.MoveTowards(movingTransform.position, destination, Time.deltaTime * autoRotateSpeed);
+            movingTransform.position = Vector3.MoveTowards(movingTransform.position, destination, Time.deltaTime * cameraMovementSpeed);
             yield return null;
         }
     }
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
     {
         while ((movingTransform.position - destination).magnitude > 0)
         {
-            movingTransform.localPosition = Vector3.MoveTowards(movingTransform.localPosition, destination, Time.deltaTime * autoRotateSpeed);
+            movingTransform.localPosition = Vector3.MoveTowards(movingTransform.localPosition, destination, Time.deltaTime * cameraMovementSpeed);
             yield return null;
         }
     }
@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal") + swipeInput.x;
 
         bool shouldAutoRotate = isAutorotateEnabled && horizontalInput == 0;
-        float resultingAutorotation = shouldAutoRotate ? autoRotateSpeed : 0;
+        float resultingAutorotation = shouldAutoRotate ? cameraMovementSpeed : 0;
 
         lookAtMePoint.Rotate(Vector3.up * (horizontalInput + resultingAutorotation) * turnSpeed);
     }
