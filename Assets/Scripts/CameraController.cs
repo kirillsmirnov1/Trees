@@ -44,8 +44,13 @@ public class CameraController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.O))
         {
-            isAutorotateEnabled = !isAutorotateEnabled;
+            FlipRotationFlag();
         }
+    }
+
+    public void FlipRotationFlag()
+    {
+        isAutorotateEnabled = !isAutorotateEnabled;
     }
 
     public void MoveCameraToShowWholeTree()
