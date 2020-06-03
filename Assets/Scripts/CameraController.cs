@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -56,8 +57,17 @@ public class CameraController : MonoBehaviour
     public void MoveCameraToShowWholeTree()
     {
         transform.localPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * verticalModifier;
+        StartCoroutine(MoveTransformToPosition(lookAtMePoint, Vector3.up * lastTreeCenter));
+    }
 
-        lookAtMePoint.position = Vector3.up * lastTreeCenter;
+    // FIXME might need to stop that, if another coroutine of the same type starts
+    private IEnumerator MoveTransformToPosition(Transform movingTransform, Vector3 destination)
+    {
+        while((movingTransform.position - destination).magnitude > 0.01) // FIXME delta
+        {
+            movingTransform.position = Vector3.MoveTowards(movingTransform.position, destination, Time.deltaTime * autoRotateSpeed);
+            yield return null;
+        }
     }
 
     private void HandleSwipeInput()
