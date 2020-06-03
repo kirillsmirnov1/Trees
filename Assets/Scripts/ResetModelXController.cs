@@ -11,13 +11,18 @@ public class ResetModelXController : MonoBehaviour, ITouchable
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    private void OnMouseDown()
+    private void OnObjectTouch()
     {
         gameController.Reset();
     }
 
-    public void OnTouchDown()
+    void ITouchable.OnTouchDown()
     {
-        OnMouseDown();
+        OnObjectTouch();
+    }
+
+    private void OnMouseDown()
+    {
+        OnObjectTouch();
     }
 }

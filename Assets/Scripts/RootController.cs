@@ -11,13 +11,18 @@ public class RootController : MonoBehaviour, ITouchable
         treeController = transform.parent.gameObject.GetComponent<TreeController>();
     }
 
-    private void OnMouseDown()
+    private void OnObjectTouch()
     {
         treeController.GenerateNewBranches();
     }
 
-    public void OnTouchDown()
+    void ITouchable.OnTouchDown()
     {
-        OnMouseDown();
+        OnObjectTouch();
+    }
+
+    private void OnMouseDown()
+    {
+        OnObjectTouch();
     }
 }

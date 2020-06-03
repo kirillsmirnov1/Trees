@@ -11,13 +11,18 @@ public class AutoRotationCapsuleController : MonoBehaviour, ITouchable
         cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
     }
 
-    private void OnMouseDown()
+    private void OnObjectTouch()
     {
         cameraController.FlipRotationFlag();
     }
 
     void ITouchable.OnTouchDown()
     {
-        OnMouseDown();
+        OnObjectTouch();
+    }
+
+    private void OnMouseDown()
+    {
+        OnObjectTouch();
     }
 }
