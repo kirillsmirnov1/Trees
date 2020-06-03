@@ -30,14 +30,6 @@ public class CameraController : MonoBehaviour
         ShowWholeTree(0, 1);
     }
 
-    public void ShowWholeTree(float center, float treeHeight)
-    {
-        lastTreeCenter = center;
-        lastTreeHeight = treeHeight;
-
-        MoveCameraToShowWholeTree();
-    }
-
     void Update()
     {
         HandleSwipeInput();
@@ -46,6 +38,14 @@ public class CameraController : MonoBehaviour
         {
             FlipRotationFlag();
         }
+    }
+
+    public void ShowWholeTree(float center, float treeHeight)
+    {
+        lastTreeCenter = center;
+        lastTreeHeight = treeHeight;
+
+        MoveCameraToShowWholeTree();
     }
 
     public void FlipRotationFlag()
