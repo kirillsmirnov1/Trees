@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
 
     /// <summary> Stores coroutine which moves lookAtMe point upwards </summary>
     private Coroutine movingUpwardsCoroutine;
+    /// <summary> Moves camera from and to tree </summary>
+    private Coroutine zoomingCoroutine;
 
     private void Start()
     {
@@ -61,7 +63,12 @@ public class CameraController : MonoBehaviour
 
     public void MoveCameraToShowWholeTree()
     {
-        transform.localPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * (verticalModifier + zoomOffset);
+        if (zoomingCoroutine != null)
+        {
+            StopCoroutine(zoomingCoroutine);
+        }
+        Vector3 newCameraPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * (verticalModifier + zoomOffset);
+        zoomingCoroutine = StartCoroutine(MoveTransformToLocalPosition(transform, newCameraPosition));
 
         if (movingUpwardsCoroutine != null)
         {
@@ -70,11 +77,21 @@ public class CameraController : MonoBehaviour
         movingUpwardsCoroutine = StartCoroutine(MoveTransformToPosition(lookAtMePoint, Vector3.up * lastTreeCenter));
     }
 
+    // FIXME shouldn't those methods be somewhere else?
     private IEnumerator MoveTransformToPosition(Transform movingTransform, Vector3 destination)
     {
         while((movingTransform.position - destination).magnitude > 0)
         {
             movingTransform.position = Vector3.MoveTowards(movingTransform.position, destination, Time.deltaTime * autoRotateSpeed);
+            yield return null;
+        }
+    }
+
+    private IEnumerator MoveTransformToLocalPosition(Transform movingTransform, Vector3 destination)
+    {
+        while ((movingTransform.position - destination).magnitude > 0)
+        {
+            movingTransform.localPosition = Vector3.MoveTowards(movingTransform.localPosition, destination, Time.deltaTime * autoRotateSpeed);
             yield return null;
         }
     }
