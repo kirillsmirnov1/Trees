@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public float verticalOffset = 1.5f;
     public float verticalModifier = 2.5f; // TODO add user control: wheel+pinch
 
+    private float zoomOffset = 0f;
+
     public float autoRotateSpeed = 0.25f;
 
     private bool movingCamera;
@@ -59,7 +61,8 @@ public class CameraController : MonoBehaviour
 
     public void MoveCameraToShowWholeTree()
     {
-        transform.localPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * verticalModifier;
+        transform.localPosition = transform.localPosition.normalized * (lastTreeHeight + verticalOffset) * (verticalModifier + zoomOffset);
+
         if (movingUpwardsCoroutine != null)
         {
             StopCoroutine(movingUpwardsCoroutine); 
