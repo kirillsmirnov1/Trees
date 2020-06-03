@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Reset();
         }
 
         // Recalculate camera pos
@@ -23,5 +23,10 @@ public class GameController : MonoBehaviour
         {
             cameraController.MoveCameraToShowWholeTree();
         }
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
