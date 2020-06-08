@@ -451,6 +451,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 842566684}
+  groundCheckLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  groundCheckDistance: 1
   rotationSpeed: 400
   maxSpeedOnGround: 10
   movementSharpnessOnGround: 15
