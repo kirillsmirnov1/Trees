@@ -14,6 +14,8 @@ public class TreeController : MonoBehaviour
 
     public float branchGeneratorRate = 0.25f;
 
+    public float showDebugRaysSeconds = 0.1f;
+
     public TextMeshProUGUI branchesCounterText;
     public GameObject branchPrefab;
 
@@ -116,7 +118,7 @@ public class TreeController : MonoBehaviour
 
         Debug.DrawRay(head.position, direction * maxDistance,
             rayHitSmth ? Color.red : Color.green,
-            gameController.showDebugRaysSeconds, false);
+            showDebugRaysSeconds, false);
 
         return !rayHitSmth;
     }
@@ -152,6 +154,9 @@ public class TreeController : MonoBehaviour
 
     private void UpdateBranchesText()
     {
-        branchesCounterText.text = "Branches: " + numberOfBranches;
+        if (branchesCounterText != null)
+        {
+            branchesCounterText.text = "Branches: " + numberOfBranches;
+        }
     }
 }
