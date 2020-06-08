@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround;
         characterVelocity = Vector3.Lerp(characterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
+        // Apply movement
         characterController.Move(characterVelocity * Time.deltaTime);
     }
 }
