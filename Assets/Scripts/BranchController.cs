@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static SceneSettings;
 
 public class BranchController : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class BranchController : MonoBehaviour
 
     private void Start()
     {
+        
         treeController = GameObject.Find("Tree").GetComponent<TreeController>();
-        treeController.CheckNewBranchHeight(transform.position.y);
+        treeController.CheckNewBranch(transform.position.y);
     }
 }

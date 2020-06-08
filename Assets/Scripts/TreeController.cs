@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static SceneSettings;
 
 public class TreeController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class TreeController : MonoBehaviour
     public GameObject branchPrefab;
 
     private CameraController cameraController;
-    private GameController gameController;
+    private SceneSettings sceneSettings;
     private int numberOfBranches = 0;
 
     private List<BranchController> branches = new List<BranchController>();
@@ -28,9 +29,12 @@ public class TreeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        
+        sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
+
+        if (sceneSettings.currentScene == SceneType.FloatingTree)
+        {
+            cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
+        }
     }
 
     // Update is called once per frame
@@ -128,33 +132,37 @@ public class TreeController : MonoBehaviour
         branches.Add(Instantiate(branchPrefab, transform).GetComponent<BranchController>());
     }
 
-    public void CheckNewBranchHeight(float y)
+    public void CheckNewBranch(float y)
     {
         numberOfBranches++;
-        UpdateBranchesText();
 
-        bool centerMoved = false;
+        if (sceneSettings.currentScene == SceneType.FloatingTree)
+        {
+            UpdateBranchesText();
 
-        if(y < lowestTreeY)
-        {
-            lowestTreeY = y;
-            centerMoved = true;
-        } 
-        else if(y > highestTreeY)
-        {
-            highestTreeY = y;
-            centerMoved = true;
-        }
+            bool centerMoved = false;
 
-        if (centerMoved)
-        {
-            cameraController.ShowWholeTree((highestTreeY + lowestTreeY)/2f, highestTreeY - lowestTreeY);
+            if (y < lowestTreeY)
+            {
+                lowestTreeY = y;
+                centerMoved = true;
+            }
+            else if (y > highestTreeY)
+            {
+                highestTreeY = y;
+                centerMoved = true;
+            }
+
+            if (centerMoved)
+            {
+                cameraController.ShowWholeTree((highestTreeY + lowestTreeY) / 2f, highestTreeY - lowestTreeY);
+            }
         }
     }
 
     private void UpdateBranchesText()
     {
-        if (branchesCounterText != null)
+        if (branchesCounterText != null && sceneSettings.currentScene == SceneType.FloatingTree)
         {
             branchesCounterText.text = "Branches: " + numberOfBranches;
         }
