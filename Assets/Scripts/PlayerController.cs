@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         // Horizontal character rotation
         transform.Rotate(new Vector3(0f, inputHandler.GetLookInputsHorizontal() * rotationSpeed, 0f), Space.Self);
 
+        // Vertical character rotation
         cameraVerticalAngle += inputHandler.GetLookInputsVertical() * rotationSpeed;
         cameraVerticalAngle = Mathf.Clamp(cameraVerticalAngle, -89f, 89f);
         playerCamera.transform.localEulerAngles = new Vector3(cameraVerticalAngle, 0, 0);
