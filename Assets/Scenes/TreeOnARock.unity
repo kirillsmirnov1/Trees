@@ -439,6 +439,11 @@ PrefabInstance:
       propertyPath: newBranchMaxRotation
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 688951920615611098, guid: de45270592e1ce64f911384a6435b51f,
+        type: 3}
+      propertyPath: radiusPerFurthestBranch
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 688951920615611100, guid: de45270592e1ce64f911384a6435b51f,
         type: 3}
       propertyPath: m_Name
