@@ -8,6 +8,7 @@ public class BranchController : MonoBehaviour
     private TreeController treeController;
 
     public int subBranches = 0;
+    private bool finishedGrowing = false;
 
     private void Start()
     {
@@ -23,7 +24,6 @@ public class BranchController : MonoBehaviour
         StartCoroutine(Grow(maxScale, growthSpeed));
     }
 
-    // TODO limit creating new branches if current has not finished growing
     private IEnumerator Grow(float maxScaleMod, float growthSpeed)
     {
         Vector3 maxScale = maxScaleMod * Vector3.one;
@@ -34,5 +34,12 @@ public class BranchController : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
+
+        finishedGrowing = true;
+    }
+
+    public bool CanGrowSubBranches()
+    {
+        return finishedGrowing;
     }
 }

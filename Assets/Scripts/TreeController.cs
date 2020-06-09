@@ -70,17 +70,21 @@ public class TreeController : MonoBehaviour
             while(branchesToGenerate-- > 0)
             {
                 int randomPos = Random.Range(0, branches.Count);
+                BranchController randomBranch = branches[randomPos];
 
-                GenerateBranch(branches[randomPos], out BranchController newBranch, out bool canBranchGenerateMore);
-
-                if (!canBranchGenerateMore)
+                if (randomBranch.CanGrowSubBranches())
                 {
-                    branches.RemoveAt(randomPos);
-                }
+                    GenerateBranch(randomBranch, out BranchController newBranch, out bool canBranchGenerateMore);
 
-                if (newBranch != null)
-                {
-                    newBranches.Add(newBranch);
+                    if (!canBranchGenerateMore)
+                    {
+                        branches.RemoveAt(randomPos);
+                    }
+
+                    if (newBranch != null)
+                    {
+                        newBranches.Add(newBranch);
+                    }
                 }
             }
 
