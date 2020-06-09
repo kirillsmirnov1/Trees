@@ -17,7 +17,7 @@ public class TreeController : MonoBehaviour
     public float branchGrowthSpeed = 1f;
 
     [Header("Fog destroyer")]
-    public float radiusPerBranches = 0.04f;
+    public float radiusPerFurthestBranch = 2f;
 
     [Header("Debug")]
     public float showDebugRaysSeconds = 0.1f;
@@ -30,6 +30,7 @@ public class TreeController : MonoBehaviour
     private SphereCollider fogDestroyer;
 
     private int numberOfBranches = 0;
+    private float furthestBranch = 0f;
 
     private List<BranchController> branches = new List<BranchController>();
 
@@ -88,11 +89,9 @@ public class TreeController : MonoBehaviour
                 }
             }
 
-            Debug.Log($"Generated branches: {newBranches.Count}");
-            Debug.Log($"Total branches: {branches.Count}");
-
-            fogDestroyer.radius = branches.Count * radiusPerBranches;
-            Debug.Log($"Fog destroyer radius: {fogDestroyer.radius}");
+            //Debug.Log($"Generated branches: {newBranches.Count}");
+            //Debug.Log($"Fog destroyer radius: {fogDestroyer.radius}");
+            //Debug.Log($"Total branches: {branches.Count}");
 
             branches.AddRange(newBranches);
         }
@@ -147,9 +146,17 @@ public class TreeController : MonoBehaviour
         branches.Add(Instantiate(branchPrefab, transform).GetComponent<BranchController>());
     }
 
-    public void CheckNewBranch(float y)
+    public void CheckNewBranch(Vector3 pos)
     {
         numberOfBranches++;
+
+        float branchDistanceFromRoot = Vector3.Distance(transform.position, pos);
+        if(branchDistanceFromRoot > furthestBranch)
+        {
+            //Debug.Log($"branchDistanceFromRoot: {branchDistanceFromRoot}");
+            furthestBranch = branchDistanceFromRoot;
+            ResizeFogDestroyer();
+        }
 
         if (sceneSettings.currentScene == SceneType.FloatingTree)
         {
@@ -157,14 +164,14 @@ public class TreeController : MonoBehaviour
 
             bool centerMoved = false;
 
-            if (y < lowestTreeY)
+            if (pos.y < lowestTreeY)
             {
-                lowestTreeY = y;
+                lowestTreeY = pos.y;
                 centerMoved = true;
             }
-            else if (y > highestTreeY)
+            else if (pos.y > highestTreeY)
             {
-                highestTreeY = y;
+                highestTreeY = pos.y;
                 centerMoved = true;
             }
 
@@ -173,6 +180,11 @@ public class TreeController : MonoBehaviour
                 cameraController.ShowWholeTree((highestTreeY + lowestTreeY) / 2f, highestTreeY - lowestTreeY);
             }
         }
+    }
+
+    private void ResizeFogDestroyer()
+    {
+        fogDestroyer.radius = furthestBranch * radiusPerFurthestBranch;
     }
 
     private void UpdateBranchesText()

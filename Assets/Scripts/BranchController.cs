@@ -14,7 +14,7 @@ public class BranchController : MonoBehaviour
     {
         
         treeController = GameObject.Find("Tree").GetComponent<TreeController>();
-        treeController.CheckNewBranch(transform.position.y);
+        treeController.CheckNewBranch(transform.position);
 
         transform.localScale = Vector3.zero;
 
