@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3595492746470549727}
   - component: {fileID: 5631016292935951855}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: FogDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

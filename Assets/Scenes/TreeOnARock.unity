@@ -499,11 +499,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4864262298601348589, guid: de45270592e1ce64f911384a6435b51f,
-        type: 3}
-      propertyPath: m_Name
-      value: FogDestroyer
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de45270592e1ce64f911384a6435b51f, type: 3}
 --- !u!1 &1139915711
