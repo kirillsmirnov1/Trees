@@ -15,6 +15,9 @@ public class TreeController : MonoBehaviour
     public float subBranchScaleModificator;
     public float branchGeneratorRate = 0.25f;
 
+    [Header("Tree aura")]
+    public float radiusPerBranches = 0.04f;
+
     [Header("Debug")]
     public float showDebugRaysSeconds = 0.1f;
 
@@ -23,6 +26,8 @@ public class TreeController : MonoBehaviour
 
     private CameraController cameraController;
     private SceneSettings sceneSettings;
+    private SphereCollider fogDestroyer;
+
     private int numberOfBranches = 0;
 
     private List<BranchController> branches = new List<BranchController>();
@@ -31,6 +36,7 @@ public class TreeController : MonoBehaviour
     void Start()
     {
         sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
+        fogDestroyer = transform.Find("FogDestroyer").GetComponent<SphereCollider>();
 
         if (sceneSettings.currentScene == SceneType.FloatingTree)
         {
@@ -53,7 +59,7 @@ public class TreeController : MonoBehaviour
         {
             GenerateFirstBranch();
         }
-        else
+        else if (branches.Count < 1000) // TODO handle branches.Count >= 1000
         {
             List<BranchController> newBranches = new List<BranchController>();
 
@@ -79,6 +85,9 @@ public class TreeController : MonoBehaviour
 
             Debug.Log($"Generated branches: {newBranches.Count}");
             Debug.Log($"Total branches: {branches.Count}");
+
+            fogDestroyer.radius = branches.Count * radiusPerBranches;
+            Debug.Log($"Fog destroyer radius: {fogDestroyer.radius}");
 
             branches.AddRange(newBranches);
         }
