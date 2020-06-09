@@ -18,6 +18,7 @@ public class TreeController : MonoBehaviour
 
     [Header("Fog destroyer")]
     public float radiusPerFurthestBranch = 2f;
+    public float radiusPerBranches = 0.04f;
 
     [Header("Debug")]
     public float showDebugRaysSeconds = 0.1f;
@@ -149,13 +150,13 @@ public class TreeController : MonoBehaviour
     public void CheckNewBranch(Vector3 pos)
     {
         numberOfBranches++;
+        ResizeFogDestroyer();
 
         float branchDistanceFromRoot = Vector3.Distance(transform.position, pos);
         if(branchDistanceFromRoot > furthestBranch)
         {
             //Debug.Log($"branchDistanceFromRoot: {branchDistanceFromRoot}");
             furthestBranch = branchDistanceFromRoot;
-            ResizeFogDestroyer();
         }
 
         if (sceneSettings.currentScene == SceneType.FloatingTree)
@@ -184,7 +185,7 @@ public class TreeController : MonoBehaviour
 
     private void ResizeFogDestroyer()
     {
-        fogDestroyer.radius = furthestBranch * radiusPerFurthestBranch;
+        fogDestroyer.radius = (furthestBranch * radiusPerFurthestBranch + radiusPerBranches * numberOfBranches) * 0.5f;
     }
 
     private void UpdateBranchesText()
