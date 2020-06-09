@@ -10,12 +10,13 @@ public class TreeController : MonoBehaviour
     public GameObject branchPrefab;
 
     [Header("Branches")]
-    public float newBranchMaxRotation = 70;
     public int subBranchesPerBranchLimit;
+    public float newBranchMaxRotation = 70;
     public float subBranchScaleModificator;
     public float branchGeneratorRate = 0.25f;
+    public float branchGrowthSpeed = 1f;
 
-    [Header("Tree aura")]
+    [Header("Fog destroyer")]
     public float radiusPerBranches = 0.04f;
 
     [Header("Debug")]
@@ -110,7 +111,6 @@ public class TreeController : MonoBehaviour
         {
             GameObject subBranch = Instantiate(branchPrefab, head.position, rotation);
             subBranch.transform.parent = parentBranch.transform;
-            subBranch.transform.localScale = subBranchScaleModificator * Vector3.one;
 
             newBranch = subBranch.GetComponent<BranchController>();
         }
