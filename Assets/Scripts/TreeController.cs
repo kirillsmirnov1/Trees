@@ -76,7 +76,8 @@ public class TreeController : MonoBehaviour
                 }
             }
 
-            Debug.Log("Generated branches: " + newBranches.Count);
+            Debug.Log($"Generated branches: {newBranches.Count}");
+            Debug.Log($"Total branches: {branches.Count}");
 
             branches.AddRange(newBranches);
         }
