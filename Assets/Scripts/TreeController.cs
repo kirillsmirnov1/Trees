@@ -5,20 +5,21 @@ using static SceneSettings;
 
 public class TreeController : MonoBehaviour
 {
-    public float lowestTreeY { get; private set; } = 0;
-    public float highestTreeY { get; private set; } = 0;
-
-    public float newBranchMaxRotation = 70;
-
-    public int subBranchesPerBranchLimit;
-    public float subBranchScaleModificator;
-
-    public float branchGeneratorRate = 0.25f;
-
-    public float showDebugRaysSeconds = 0.1f;
-
+    [Header("References")]
     public TextMeshProUGUI branchesCounterText;
     public GameObject branchPrefab;
+
+    [Header("Branches")]
+    public float newBranchMaxRotation = 70;
+    public int subBranchesPerBranchLimit;
+    public float subBranchScaleModificator;
+    public float branchGeneratorRate = 0.25f;
+
+    [Header("Debug")]
+    public float showDebugRaysSeconds = 0.1f;
+
+    public float lowestTreeY { get; private set; } = 0;
+    public float highestTreeY { get; private set; } = 0;
 
     private CameraController cameraController;
     private SceneSettings sceneSettings;
