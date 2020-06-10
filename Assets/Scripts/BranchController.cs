@@ -5,7 +5,7 @@ public class BranchController : MonoBehaviour
 {
     public GameObject branch;
 
-    private TreeController treeController;
+    public TreeController treeController { get; private set; }
 
     public int subBranches = 0;
     private bool finishedGrowing = false;

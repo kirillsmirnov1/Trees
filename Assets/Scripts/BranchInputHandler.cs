@@ -11,7 +11,7 @@ public class BranchInputHandler : MonoBehaviour
         { 
             if(_treeController == null)
             {
-                _treeController = GameObject.Find("Tree").GetComponent<TreeController>();
+                _treeController = transform.parent.GetComponent<BranchController>().treeController;
             }
             return _treeController;
         } 
