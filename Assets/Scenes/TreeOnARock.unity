@@ -213,6 +213,12 @@ Transform:
   m_Father: {fileID: 1439188774}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &144393532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8744269632467591740, guid: de45270592e1ce64f911384a6435b51f,
+    type: 3}
+  m_PrefabInstance: {fileID: 556106682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &239651038
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +888,11 @@ PrefabInstance:
       propertyPath: TriggerModule.inside
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198748979371217952, guid: 1a365141225c22e49a7bb976869b22a8,
+        type: 3}
+      propertyPath: TriggerModule.collisionShape1
+      value: 
+      objectReference: {fileID: 144393532}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
 --- !u!4 &1487586803 stripped
@@ -969,6 +980,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 239651039}
     m_Modifications:
+    - target: {fileID: 1595104463801743512, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595104464209625062, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595104464538931193, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1595104465170349482, guid: ffe007ed95216df4895836adef26ba44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1028,6 +1054,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CliffWrapper
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595104465405329340, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595104465548884836, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595104465617451968, guid: ffe007ed95216df4895836adef26ba44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffe007ed95216df4895836adef26ba44, type: 3}
