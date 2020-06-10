@@ -15,7 +15,7 @@ public class BranchController : MonoBehaviour
     private void Start()
     {
         
-        treeController = GameObject.Find("Tree").GetComponent<TreeController>();
+        // treeController = GameObject.Find("Tree").GetComponent<TreeController>();
         treeController.CheckNewBranch(transform.position);
 
         transform.localScale = Vector3.zero;
@@ -25,6 +25,11 @@ public class BranchController : MonoBehaviour
         float growthDelay = generation < 3 ? 0f : Random.Range(0f, treeController.maxGrowthDelay);
 
         StartCoroutine(Grow(maxScale, growthSpeed, growthDelay));
+    }
+
+    public void SetTreeReference(TreeController treeReference)
+    {
+        treeController = treeReference;
     }
 
     private IEnumerator Grow(float maxScaleMod, float growthSpeed, float growthDelay)

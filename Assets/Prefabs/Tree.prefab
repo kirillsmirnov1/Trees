@@ -46,12 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   branchesCounterText: {fileID: 0}
-  branchPrefab: {fileID: 5494802616617793664, guid: a2a047d0ae27eb54481930bb0a2f1752,
+  branchPrefab: {fileID: 5494802616617793664, guid: c84bcb60fdbef144ba0129dcc247f298,
     type: 3}
-  newBranchMaxRotation: 70
-  subBranchesPerBranchLimit: 4
+  branchesPerTreeLimit: 1000
+  subBranchesPerBranchLimit: 3
+  newBranchMaxRotation: 40
   subBranchScaleModificator: 0.9
   branchGeneratorRate: 0.25
+  maxGrowthDelay: 0.5
+  branchGrowthSpeed: 3
+  radiusPerFurthestBranch: 1
   radiusPerBranches: 0.04
   showDebugRaysSeconds: 0.1
 --- !u!1 &688951920883411565

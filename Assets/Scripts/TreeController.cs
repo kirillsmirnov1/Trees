@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static SceneSettings;
@@ -77,7 +78,7 @@ public class TreeController : MonoBehaviour
 
             while(branchesToGenerate-- > 0)
             {
-                int randomPos = Random.Range(0, branches.Count);
+                int randomPos = UnityEngine.Random.Range(0, branches.Count);
                 BranchController randomBranch = branches[randomPos];
 
                 if (randomBranch.CanGrowSubBranches())
@@ -114,8 +115,8 @@ public class TreeController : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(
             parentBranch.transform.rotation.eulerAngles
-            + Vector3.right * Random.Range(-newBranchMaxRotation, newBranchMaxRotation) // TODO [-1 or 1] * Random(30, 70)
-            + Vector3.forward * Random.Range(-newBranchMaxRotation, newBranchMaxRotation)
+            + Vector3.right * UnityEngine.Random.Range(-newBranchMaxRotation, newBranchMaxRotation) // TODO [-1 or 1] * Random(30, 70)
+            + Vector3.forward * UnityEngine.Random.Range(-newBranchMaxRotation, newBranchMaxRotation)
             );
 
         if (NoIntersections(head, tail, rotation * Vector3.up, newBranchGeneration))
@@ -124,6 +125,8 @@ public class TreeController : MonoBehaviour
             subBranch.transform.parent = parentBranch.transform;
 
             newBranch = subBranch.GetComponent<BranchController>();
+
+            newBranch.SetTreeReference(this);
             newBranch.generation = newBranchGeneration;
         }
         else
@@ -152,7 +155,14 @@ public class TreeController : MonoBehaviour
 
     private void GenerateFirstBranch()
     {
-        branches.Add(Instantiate(branchPrefab, transform).GetComponent<BranchController>());
+        BranchController branch = Instantiate(branchPrefab, transform).GetComponent<BranchController>();
+        SetTreeReference(branch);
+        branches.Add(branch);
+    }
+
+    private void SetTreeReference(BranchController branch)
+    {
+        branch.SetTreeReference(this);
     }
 
     public void CheckNewBranch(Vector3 pos)
