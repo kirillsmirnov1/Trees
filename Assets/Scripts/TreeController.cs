@@ -69,7 +69,7 @@ public class TreeController : MonoBehaviour
             List<BranchController> newBranches = new List<BranchController>();
 
             int branchesToGenerate = (int)System.Math.Ceiling(numberOfBranches * branchGeneratorRate);
-            Debug.Log("branchesToGenerate: " + branchesToGenerate);
+            //Debug.Log("branchesToGenerate: " + branchesToGenerate);
 
             while(branchesToGenerate-- > 0)
             {
