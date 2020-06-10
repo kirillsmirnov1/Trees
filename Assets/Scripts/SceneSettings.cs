@@ -8,6 +8,7 @@ public class SceneSettings : MonoBehaviour
     public enum SceneType
     {
         FloatingTree,
-        TreeOnACliff
+        TreeOnACliff,
+        LandOfFog
     };
 }
