@@ -15,6 +15,7 @@ public class TreeController : MonoBehaviour
     public float newBranchMaxRotation = 70;
     public float subBranchScaleModificator;
     public float branchGeneratorRate = 0.25f;
+    public float maxGrowthDelay = 0.5f;
     public float branchGrowthSpeed = 1f;
 
     [Header("Fog destroyer")]

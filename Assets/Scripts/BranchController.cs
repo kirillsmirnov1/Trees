@@ -22,13 +22,16 @@ public class BranchController : MonoBehaviour
 
         float maxScale = treeController.subBranchScaleModificator;
         float growthSpeed = treeController.branchGrowthSpeed;
+        float growthDelay = generation < 3 ? 0f : Random.Range(0f, treeController.maxGrowthDelay);
 
-        StartCoroutine(Grow(maxScale, growthSpeed));
+        StartCoroutine(Grow(maxScale, growthSpeed, growthDelay));
     }
 
-    private IEnumerator Grow(float maxScaleMod, float growthSpeed)
+    private IEnumerator Grow(float maxScaleMod, float growthSpeed, float growthDelay)
     {
         Vector3 maxScale = maxScaleMod * Vector3.one;
+
+        yield return new WaitForSeconds(growthDelay);
 
         while(maxScale.x > transform.localScale.x)
         {
