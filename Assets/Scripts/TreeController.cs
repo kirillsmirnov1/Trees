@@ -33,6 +33,8 @@ public class TreeController : MonoBehaviour
     private int numberOfBranches = 0;
     private float furthestBranch = 0f;
 
+    private readonly float branchRadius = 0.3f;
+
     private List<BranchController> branches = new List<BranchController>();
 
     // Start is called before the first frame update
@@ -101,6 +103,7 @@ public class TreeController : MonoBehaviour
     private void GenerateBranch(BranchController parentBranch, out BranchController newBranch, out bool canBranchGenerateMore)
     {
         parentBranch.subBranches++;
+        int newBranchGeneration = parentBranch.generation + 1;
 
         Transform head = parentBranch.transform.Find("Head");
         Transform tail = parentBranch.transform.Find("Tail");
@@ -111,12 +114,13 @@ public class TreeController : MonoBehaviour
             + Vector3.forward * Random.Range(-newBranchMaxRotation, newBranchMaxRotation)
             );
 
-        if (NoIntersections(head, tail, rotation * Vector3.up))
+        if (NoIntersections(head, tail, rotation * Vector3.up, newBranchGeneration))
         {
             GameObject subBranch = Instantiate(branchPrefab, head.position, rotation);
             subBranch.transform.parent = parentBranch.transform;
 
             newBranch = subBranch.GetComponent<BranchController>();
+            newBranch.generation = newBranchGeneration;
         }
         else
         {
@@ -126,15 +130,15 @@ public class TreeController : MonoBehaviour
         canBranchGenerateMore = parentBranch.subBranches < subBranchesPerBranchLimit;
     }
 
-    private bool NoIntersections(Transform head, Transform tail, Vector3 direction)
+    private bool NoIntersections(Transform head, Transform tail, Vector3 direction, int newBranchGeneration)
     {
-        Ray ray = new Ray(head.position, direction);
-
         float maxDistance = (head.position - tail.position)
             .magnitude / subBranchScaleModificator;
 
-        bool rayHitSmth = Physics.Raycast(ray, maxDistance);
+        float radius = branchRadius * Mathf.Pow(subBranchScaleModificator, newBranchGeneration);
 
+        bool rayHitSmth = Physics.CapsuleCast(head.position, head.position, radius, direction, maxDistance);
+       
         Debug.DrawRay(head.position, direction * maxDistance,
             rayHitSmth ? Color.red : Color.green,
             showDebugRaysSeconds, false);

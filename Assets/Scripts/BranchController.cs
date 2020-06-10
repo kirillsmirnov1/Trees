@@ -10,6 +10,8 @@ public class BranchController : MonoBehaviour
     public int subBranches = 0;
     private bool finishedGrowing = false;
 
+    public int generation = 0;
+
     private void Start()
     {
         
