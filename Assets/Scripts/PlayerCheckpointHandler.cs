@@ -38,5 +38,12 @@ public class PlayerCheckpointHandler : MonoBehaviour
         }
 
         Debug.DrawLine(transform.position, closestCp.transform.position, Color.green, 0.02f);
+
+        ActivateTeleportation(closestCp);
+    }
+
+    private void ActivateTeleportation(GameObject closestCp)
+    {
+        transform.position = closestCp.transform.Find("TeleportPoint").position;
     }
 }
