@@ -449,6 +449,22 @@ PrefabInstance:
       propertyPath: branchGrowthSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 688951920615611098, guid: de45270592e1ce64f911384a6435b51f,
+        type: 3}
+      propertyPath: branchPrefab
+      value: 
+      objectReference: {fileID: 5494802616617793664, guid: c84bcb60fdbef144ba0129dcc247f298,
+        type: 3}
+    - target: {fileID: 688951920615611098, guid: de45270592e1ce64f911384a6435b51f,
+        type: 3}
+      propertyPath: subBranchScaleModificator
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 688951920615611098, guid: de45270592e1ce64f911384a6435b51f,
+        type: 3}
+      propertyPath: subBranchesPerBranchLimit
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 688951920615611100, guid: de45270592e1ce64f911384a6435b51f,
         type: 3}
       propertyPath: m_Name

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 3424637765023115425}
   - component: {fileID: 2528304032948532387}
   m_Layer: 0
-  m_Name: BranchWrapperCopy
+  m_Name: FrBranchWrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7285867439833267220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3424637765023115425}
@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 8021687289611798533, guid: 5376c6af643635b4baa22637e8c39314,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.21
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 8021687289611798533, guid: 5376c6af643635b4baa22637e8c39314,
         type: 3}
@@ -192,7 +192,7 @@ PrefabInstance:
     - target: {fileID: 8021687289611798533, guid: 5376c6af643635b4baa22637e8c39314,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8385279859668558622, guid: 5376c6af643635b4baa22637e8c39314,
         type: 3}
