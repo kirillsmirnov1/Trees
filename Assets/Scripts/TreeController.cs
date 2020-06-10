@@ -10,6 +10,7 @@ public class TreeController : MonoBehaviour
     public GameObject branchPrefab;
 
     [Header("Branches")]
+    public int branchesPerTreeLimit = 1000;
     public int subBranchesPerBranchLimit;
     public float newBranchMaxRotation = 70;
     public float subBranchScaleModificator;
@@ -49,12 +50,14 @@ public class TreeController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (sceneSettings.currentScene == SceneType.FloatingTree || sceneSettings.currentScene == SceneType.TreeOnACliff)
         {
-            GenerateNewBranches();
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                GenerateNewBranches();
+            }
         }
     }
 
@@ -64,7 +67,7 @@ public class TreeController : MonoBehaviour
         {
             GenerateFirstBranch();
         }
-        else if (branches.Count < 1000) // TODO handle branches.Count >= 1000
+        else if (branches.Count < branchesPerTreeLimit) // TODO handle branches.Count >= 1000
         {
             List<BranchController> newBranches = new List<BranchController>();
 
