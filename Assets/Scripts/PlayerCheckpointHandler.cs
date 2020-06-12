@@ -6,19 +6,36 @@ using UnityEngine;
 
 public class PlayerCheckpointHandler : MonoBehaviour
 {
-    private List<GameObject> checkPoints = new List<GameObject>();
+    private readonly List<GameObject> checkPoints = new List<GameObject>();
+    private GameObject closestCheckpoint;
+    private readonly float checkpointMaxDistance = 100f;
+
+    private readonly float checkpointCheckRate = 1f;
 
     public void AddCheckPoint(GameObject checkPoint)
     {
         checkPoints.Add(checkPoint);
     }
 
-    private void OnParticleCollision(GameObject other)
+    private void Start()
     {
-        if (other.CompareTag("Fog"))
+        StartCoroutine(CheckCheckpointDistance());
+    }
+
+    private IEnumerator CheckCheckpointDistance()
+    {
+        if (NeedToRecheckCheckpoint())
         {
             HandleCheckPoints();
         }
+        yield return new WaitForSeconds(checkpointCheckRate);
+        StartCoroutine(CheckCheckpointDistance());
+    }
+
+    private bool NeedToRecheckCheckpoint()
+    {
+        if (closestCheckpoint == null) return true;
+        return Vector3.Distance(closestCheckpoint.transform.position, transform.position) > checkpointMaxDistance;
     }
 
     private void HandleCheckPoints()
@@ -28,7 +45,7 @@ public class PlayerCheckpointHandler : MonoBehaviour
 
         foreach(GameObject checkPoint in checkPoints)
         {
-            Debug.DrawLine(checkPoint.transform.position, transform.position, Color.blue, 0.01f);
+            Debug.DrawLine(checkPoint.transform.position, transform.position, Color.blue, 1f);
             float d = Vector3.Distance(checkPoint.transform.position, transform.position);
             if (d < minDistance)
             {
@@ -37,13 +54,8 @@ public class PlayerCheckpointHandler : MonoBehaviour
             }
         }
 
-        Debug.DrawLine(transform.position, closestCp.transform.position, Color.green, 0.02f);
+        closestCheckpoint = closestCp;
 
-        ActivateTeleportation(closestCp);
-    }
-
-    private void ActivateTeleportation(GameObject closestCp)
-    {
-        transform.position = closestCp.transform.Find("TeleportPoint").position;
+        Debug.DrawLine(transform.position, closestCp.transform.position, Color.green, 1f);
     }
 }
