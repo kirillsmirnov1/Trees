@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4103333903944158}
   - component: {fileID: 198748979371217952}
   - component: {fileID: 199183317042074402}
-  - component: {fileID: 3518832577364325319}
+  - component: {fileID: 375501853417187009}
   m_Layer: 0
   m_Name: GroundFog
   m_TagString: Fog
@@ -4755,7 +4755,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3518832577364325319
+--- !u!114 &375501853417187009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4764,6 +4764,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1269120730060968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e01991bc5adab4d8c1b0ec3d6d1018, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dab2c8678add494e85a8a99f82f1563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

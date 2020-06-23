@@ -176,6 +176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FogDestroyer
       objectReference: {fileID: 0}
+    - target: {fileID: 809935128424666894, guid: 494bafb06d18a3648836fcc8b4856fac,
+        type: 3}
+      propertyPath: m_TagString
+      value: FogDestroyer
+      objectReference: {fileID: 0}
     - target: {fileID: 3595492746470549727, guid: 494bafb06d18a3648836fcc8b4856fac,
         type: 3}
       propertyPath: m_LocalPosition.x

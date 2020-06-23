@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CheckPoint
   - Fog
+  - FogDestroyer
   layers:
   - Default
   - TransparentFX

@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &144393532 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8744269632467591740, guid: de45270592e1ce64f911384a6435b51f,
-    type: 3}
-  m_PrefabInstance: {fileID: 556106682}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &239651038
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +402,9 @@ PrefabInstance:
         type: 3}
       propertyPath: TriggerModule.collisionShape1
       value: 
-      objectReference: {fileID: 144393532}
-    m_RemovedComponents: []
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3518832577364325319, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
 --- !u!4 &1487586803 stripped
 Transform:
