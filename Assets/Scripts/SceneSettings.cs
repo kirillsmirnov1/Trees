@@ -9,6 +9,7 @@ public class SceneSettings : MonoBehaviour
     {
         FloatingTree,
         TreeOnACliff,
-        LandOfFog
+        LandOfFog,
+        MainScene
     };
 }
