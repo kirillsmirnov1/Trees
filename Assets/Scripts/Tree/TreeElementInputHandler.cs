@@ -27,6 +27,10 @@ public class TreeElementInputHandler : MonoBehaviour, ITouchable
         {
             TreeController.ResetTree();
         }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            TreeController.GrowFullTree();
+        }
         else
         {
             TreeController.GenerateNewBranches();

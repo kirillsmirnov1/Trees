@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Tree;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,12 +39,11 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     private int numberOfBranches = 0;
     private float furthestBranch = 0f;
-
     private readonly float branchRadius = 0.3f;
 
     private readonly List<BranchController> branches = new List<BranchController>();
+    private Coroutine autoGrowthCoroutine;
 
-    // Start is called before the first frame update
     void Start()
     {
         sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
@@ -67,6 +68,8 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     public void ResetTree()
     {
+        StopCoroutine(autoGrowthCoroutine);
+
         numberOfBranches = 0;
         furthestBranch = 0;
 
@@ -77,6 +80,20 @@ public class TreeController : MonoBehaviour, ITreeElementController
         }
 
         branches.Clear();
+        ResizeFogDestroyer();
+    }
+    public void GrowFullTree()
+    {
+        autoGrowthCoroutine = StartCoroutine(GenerateAllBranches());
+    }
+
+    private IEnumerator GenerateAllBranches()
+    {
+        while (branches.Count < branchesPerTreeLimit)
+        {
+            GenerateNewBranches();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     public void GenerateNewBranches()
