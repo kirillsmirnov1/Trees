@@ -70,9 +70,10 @@ public class TreeController : MonoBehaviour, ITreeElementController
         numberOfBranches = 0;
         furthestBranch = 0;
 
-        foreach(BranchController branch in branches)
+        foreach (Transform child in transform)
         {
-            Destroy(branch.gameObject);
+            if(child.TryGetComponent(out BranchController branch))
+                branch.DestroyBranch();
         }
 
         branches.Clear();

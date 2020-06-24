@@ -23,7 +23,14 @@ public class TreeElementInputHandler : MonoBehaviour, ITouchable
 
     private void OnObjectTouch()
     {
-        TreeController.GenerateNewBranches();
+        if (Input.GetKey(KeyCode.Q))
+        {
+            TreeController.ResetTree();
+        }
+        else
+        {
+            TreeController.GenerateNewBranches();
+        }
     }
 
     public void OnTouchDown()

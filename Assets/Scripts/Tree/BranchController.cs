@@ -51,4 +51,15 @@ public class BranchController : MonoBehaviour, ITreeElementController
     {
         return finishedGrowing;
     }
+
+    public void DestroyBranch() // TODO Shrink
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent(out BranchController branch))
+                branch.DestroyBranch();
+        }
+
+        Destroy(gameObject);
+    }
 }
