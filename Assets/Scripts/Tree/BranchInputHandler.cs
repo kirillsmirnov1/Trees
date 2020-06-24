@@ -11,7 +11,7 @@ public class BranchInputHandler : MonoBehaviour
         { 
             if(_treeController == null)
             {
-                _treeController = transform.parent.GetComponent<BranchController>().treeController;
+                _treeController = transform.parent.GetComponent<BranchController>().TreeController;
             }
             return _treeController;
         } 

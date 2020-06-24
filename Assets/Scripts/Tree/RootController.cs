@@ -16,7 +16,7 @@ public class RootController : MonoBehaviour, ITouchable
         treeController.GenerateNewBranches();
     }
 
-    void ITouchable.OnTouchDown()
+    public void OnTouchDown()
     {
         OnObjectTouch();
     }

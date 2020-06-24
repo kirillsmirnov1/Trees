@@ -62,6 +62,19 @@ public class TreeController : MonoBehaviour
         }
     }
 
+    public void ResetTree()
+    {
+        numberOfBranches = 0;
+        furthestBranch = 0;
+
+        foreach(BranchController branch in branches)
+        {
+            Destroy(branch.gameObject);
+        }
+
+        branches.Clear();
+    }
+
     public void GenerateNewBranches()
     {
         if(branches.Count == 0)
