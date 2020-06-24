@@ -31,7 +31,7 @@ public class BranchController : MonoBehaviour, ITreeElementController
         TreeController = treeReference;
     }
 
-    private IEnumerator Grow(float resultScaleMod, float growthSpeed, float growthDelay)
+    private IEnumerator Grow(float resultScaleMod, float growthSpeed, float growthDelay = 0f, bool destroyInTheEnd = false)
     {
         Vector3 resultScale = resultScaleMod * Vector3.one;
 
@@ -45,6 +45,11 @@ public class BranchController : MonoBehaviour, ITreeElementController
         }
 
         finishedGrowing = true;
+
+        if(destroyInTheEnd)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public bool CanGrowSubBranches()
@@ -52,7 +57,7 @@ public class BranchController : MonoBehaviour, ITreeElementController
         return finishedGrowing;
     }
 
-    public void DestroyBranch() // TODO Shrink
+    public void DestroyBranch() 
     {
         foreach (Transform child in transform)
         {
@@ -60,6 +65,12 @@ public class BranchController : MonoBehaviour, ITreeElementController
                 branch.DestroyBranch();
         }
 
-        Destroy(gameObject);
+        StartCoroutine(
+            Grow(
+                resultScaleMod: 0f, 
+                growthSpeed: TreeController.branchGrowthSpeed / 2, 
+                destroyInTheEnd: true
+                )
+            );
     }
 }
