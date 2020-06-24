@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static SceneSettings;
@@ -26,8 +25,8 @@ public class TreeController : MonoBehaviour
     [Header("Debug")]
     public float showDebugRaysSeconds = 0.1f;
 
-    public float lowestTreeY { get; private set; } = 0;
-    public float highestTreeY { get; private set; } = 0;
+    public float LowestTreeY { get; private set; } = 0;
+    public float HighestTreeY { get; private set; } = 0;
 
     private CameraController cameraController;
     private SceneSettings sceneSettings;
@@ -38,7 +37,7 @@ public class TreeController : MonoBehaviour
 
     private readonly float branchRadius = 0.3f;
 
-    private List<BranchController> branches = new List<BranchController>();
+    private readonly List<BranchController> branches = new List<BranchController>();
 
     // Start is called before the first frame update
     void Start()
@@ -183,20 +182,20 @@ public class TreeController : MonoBehaviour
 
             bool centerMoved = false;
 
-            if (pos.y < lowestTreeY)
+            if (pos.y < LowestTreeY)
             {
-                lowestTreeY = pos.y;
+                LowestTreeY = pos.y;
                 centerMoved = true;
             }
-            else if (pos.y > highestTreeY)
+            else if (pos.y > HighestTreeY)
             {
-                highestTreeY = pos.y;
+                HighestTreeY = pos.y;
                 centerMoved = true;
             }
 
             if (centerMoved)
             {
-                cameraController.ShowWholeTree((highestTreeY + lowestTreeY) / 2f, highestTreeY - lowestTreeY);
+                cameraController.ShowWholeTree((HighestTreeY + LowestTreeY) / 2f, HighestTreeY - LowestTreeY);
             }
         }
     }
