@@ -31,15 +31,15 @@ public class BranchController : MonoBehaviour, ITreeElementController
         TreeController = treeReference;
     }
 
-    private IEnumerator Grow(float maxScaleMod, float growthSpeed, float growthDelay)
+    private IEnumerator Grow(float resultScaleMod, float growthSpeed, float growthDelay)
     {
-        Vector3 maxScale = maxScaleMod * Vector3.one;
+        Vector3 resultScale = resultScaleMod * Vector3.one;
 
         yield return new WaitForSeconds(growthDelay);
 
-        while(maxScale.x > transform.localScale.x)
+        while(Mathf.Abs(resultScale.x - transform.localScale.x) > 0.001f)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, maxScale, growthSpeed * Time.deltaTime);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, resultScale, growthSpeed * Time.deltaTime);
 
             yield return new WaitForSeconds(0.01f);
         }
