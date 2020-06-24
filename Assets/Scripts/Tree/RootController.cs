@@ -1,28 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Tree;
 using UnityEngine;
 
-public class RootController : MonoBehaviour, ITouchable
+public class RootController : MonoBehaviour, ITreeElementController
 {
-    private TreeController treeController;
+    public TreeController TreeController { get; private set;  }
 
     private void Start()
     {
-        treeController = transform.parent.gameObject.GetComponent<TreeController>();
-    }
-
-    private void OnObjectTouch()
-    {
-        treeController.GenerateNewBranches();
-    }
-
-    public void OnTouchDown()
-    {
-        OnObjectTouch();
-    }
-
-    private void OnMouseDown()
-    {
-        OnObjectTouch();
+        TreeController = transform.parent.gameObject.GetComponent<TreeController>();
     }
 }

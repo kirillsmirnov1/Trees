@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Tree;
+using System.Collections;
 using UnityEngine;
 
-public class BranchController : MonoBehaviour
+public class BranchController : MonoBehaviour, ITreeElementController
 {
     public GameObject branch;
 

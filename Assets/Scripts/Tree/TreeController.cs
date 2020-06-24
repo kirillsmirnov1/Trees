@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Tree;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static SceneSettings;
 
-public class TreeController : MonoBehaviour
+public class TreeController : MonoBehaviour, ITreeElementController
 {
     [Header("References")]
     public TextMeshProUGUI branchesCounterText;
@@ -11,9 +12,9 @@ public class TreeController : MonoBehaviour
 
     [Header("Branches")]
     public int branchesPerTreeLimit = 1000;
-    public int subBranchesPerBranchLimit;
+    public int subBranchesPerBranchLimit = 3;
     public float newBranchMaxRotation = 70;
-    public float subBranchScaleModificator;
+    public float subBranchScaleModificator = 0.9f;
     public float branchGeneratorRate = 0.25f;
     public float maxGrowthDelay = 0.5f;
     public float branchGrowthSpeed = 1f;
@@ -27,6 +28,8 @@ public class TreeController : MonoBehaviour
 
     public float LowestTreeY { get; private set; } = 0;
     public float HighestTreeY { get; private set; } = 0;
+
+    TreeController ITreeElementController.TreeController => this;
 
     private CameraController cameraController;
     private SceneSettings sceneSettings;
