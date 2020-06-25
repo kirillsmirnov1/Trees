@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4103333903944158}
   - component: {fileID: 198748979371217952}
   - component: {fileID: 199183317042074402}
-  - component: {fileID: 375501853417187009}
   m_Layer: 0
   m_Name: GroundFog
   m_TagString: Fog
@@ -3555,7 +3554,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
@@ -3625,7 +3624,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3733,7 +3732,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 512
     maxCollisionShapes: 256
     quality: 2
     voxelSize: 0.5
@@ -4755,15 +4754,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &375501853417187009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269120730060968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dab2c8678add494e85a8a99f82f1563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
