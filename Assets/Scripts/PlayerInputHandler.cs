@@ -85,6 +85,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool CanProcessInput()
     {
-        return Cursor.lockState == CursorLockMode.Locked;
+        return Cursor.lockState == CursorLockMode.Locked && !Letter.ShowingAnyLetter;
     }
 }
