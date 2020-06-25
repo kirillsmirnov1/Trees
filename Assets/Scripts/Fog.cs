@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FogController : MonoBehaviour
+public class Fog : MonoBehaviour
 {
     private int numberOfColliders = 0;
 
