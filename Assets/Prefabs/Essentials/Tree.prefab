@@ -50,7 +50,7 @@ MonoBehaviour:
     type: 3}
   branchesPerTreeLimit: 1000
   subBranchesPerBranchLimit: 3
-  newBranchMaxRotation: 70
+  newBranchMaxRotation: 45
   subBranchScaleModificator: 0.9
   branchGeneratorRate: 0.25
   maxGrowthDelay: 0.5
