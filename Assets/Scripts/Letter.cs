@@ -10,6 +10,9 @@ public class Letter : MonoBehaviour
     [Tooltip("Material used when letter is shown to player. This material should have emission with the same texture as in Albedo")]
     public Material showMaterial;
 
+    [Tooltip("Unique letter key. Used for getting text from storage")]
+    public string key = null;
+
     /// <summary>
     /// Tells if any layer on scene is shown right now. Use it when checking if player can move
     /// </summary>
@@ -36,6 +39,10 @@ public class Letter : MonoBehaviour
         letterTextMesh = transform.Find("Text").GetComponent<TextMeshPro>();
         restPosition = transform.position;
         restRotation = transform.rotation;
+
+        letterText = LetterTextStorage.Text.ContainsKey(key)
+            ? LetterTextStorage.Text[key] 
+            : "NO TEXT FOUND SEND HELP IMMEDIATELY";
     }
 
     private void CheckPrerequisites()
