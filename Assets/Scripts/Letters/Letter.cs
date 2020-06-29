@@ -1,15 +1,9 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Letter : MonoBehaviour
 {
-    public string letterText = "Hi there!";
-
-    [Tooltip("Material used when letter is resting")]
-    public Material restMaterial;
-    [Tooltip("Material used when letter is shown to player. This material should have emission with the same texture as in Albedo")]
-    public Material showMaterial;
-
     [Tooltip("Unique letter key. Used for getting text from storage")]
     public string key = null;
 
@@ -20,94 +14,34 @@ public class Letter : MonoBehaviour
 
     private TextMeshPro letterTextMesh;
 
-    private Vector3 restPosition;
-    private Quaternion restRotation;
-
-    private readonly static Vector3 restScale = new Vector3(0.5f, 0.5f, 1e-5f);
-    private readonly static Vector3 showScale = new Vector3(0.4f, 0.4f, 1e-5f);
-
-    private bool showingLetter = false;
     private static bool showingAnyLetter = false;
 
-    private const string LetterPlaceholderObjectName = "LetterPlaceholder";
-    private const string IgnoreLightLayerName = "IgnoreLight";
+    private GUI gui;
 
     void Start()
     {
-        CheckPrerequisites();
-
         letterTextMesh = transform.Find("Text").GetComponent<TextMeshPro>();
-        restPosition = transform.position;
-        restRotation = transform.rotation;
+        gui = GameObject.Find("GUI").GetComponent<GUI>();
 
-        letterText = LetterTextStorage.Text.ContainsKey(key)
-            ? LetterTextStorage.Text[key] 
+        letterTextMesh.text = LetterTextStorage.Text.ContainsKey(key)
+            ? LetterTextStorage.Text[key]
             : "NO TEXT FOUND SEND HELP IMMEDIATELY";
-    }
 
-    private void CheckPrerequisites()
-    {
-        if(Camera.main.transform.Find(LetterPlaceholderObjectName) == null)
-        { 
-            Debug.LogError("Couldn't find placeholder for letter on main camera"); 
-        }
-
-        if(LayerMask.NameToLayer(IgnoreLightLayerName) == -1)
-        {
-            Debug.LogError("Couldn't find IgnoreLight layer");
-        }
-    }
-
-    void Update()
-    {
-        if (letterTextMesh.text != letterText)
-        {
-            letterTextMesh.text = letterText;
-        }
     }
 
     private void OnMouseDown()
     {
-        HandleClickOnLetter();
+        if(!showingAnyLetter)
+            gui.ShowLetter(letterTextMesh.text);
     }
 
-    private void HandleClickOnLetter()
+    internal static void UiLetterIsShown()
     {
-        if (showingLetter)
-        {
-            MoveToRest();
-        }
-        else if (!showingAnyLetter) // Don't show new letter, if some letter is already shown
-        {
-            ShowToPlayer();
-        }
-    }
-
-    private void MoveToRest()
-    {
-        showingLetter = false;
-        showingAnyLetter = false;
-
-        transform.position = restPosition;
-        transform.localScale = restScale;
-        transform.rotation = restRotation;
-
-        GetComponent<MeshRenderer>().material = restMaterial;
-        gameObject.layer = LayerMask.NameToLayer("Default");
-    }
-
-    private void ShowToPlayer()
-    {
-        Transform LetterPlaceholder = Camera.main.transform.Find(LetterPlaceholderObjectName);
-
-        showingLetter = true;
         showingAnyLetter = true;
+    }
 
-        transform.position = LetterPlaceholder.position;
-        transform.localScale = showScale;
-        transform.rotation = LetterPlaceholder.rotation;
-
-        GetComponent<MeshRenderer>().material = showMaterial;
-        gameObject.layer = LayerMask.NameToLayer(IgnoreLightLayerName);
+    internal static void UiLetterIsHidden()
+    {
+        showingAnyLetter = false;
     }
 }

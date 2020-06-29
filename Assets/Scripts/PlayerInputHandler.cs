@@ -1,36 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     public float lookSensitivity = 1f;
     public float webglLookSensitivityMultiplier = 0.25f;
 
-    private bool cursorUnlocked = false;
+    private GUI gui;
+
+    private static bool cursorLocked = true;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        gui = GameObject.Find("GUI").GetComponent<GUI>();
     }
 
     void Update()
     {
-        if (!cursorUnlocked && Input.GetKeyDown(KeyCode.Escape))
+        if (cursorLocked && Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            cursorUnlocked = true;
+            UnlockCursor();
         }
 
-        if(cursorUnlocked && Input.GetMouseButtonDown(0))
+        if(!cursorLocked && Input.GetMouseButtonDown(0))
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            cursorUnlocked = false;
+            LockCursor();
         }
+
+        if(Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)
+        {
+            gui.HideLetter();
+        }
+    }
+
+    public static void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        cursorLocked = true;
+    }
+
+    public static void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        cursorLocked = false;
     }
 
     public Vector3 GetMoveInput()
