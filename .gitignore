@@ -60,3 +60,11 @@ crashlytics-build.properties
 
 connectwebgl.zip
 ProjectSettings/EditorBuildSettings.asset
+
+# Lightmaps
+*.exr
+*.exr.meta
+LightmapSnapshot.asset
+LightmapSnapshot.asset.meta
+LightingData.asset
+LightingData.asset.meta
