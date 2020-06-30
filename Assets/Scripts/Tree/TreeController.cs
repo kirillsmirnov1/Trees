@@ -34,7 +34,29 @@ public class TreeController : MonoBehaviour, ITreeElementController
     TreeController ITreeElementController.TreeController => this;
 
     private CameraController cameraController;
+    private SceneSettings SceneSettings
+    {
+        get
+        {
+            if (sceneSettings == null)
+            {
+                sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
+            }
+            return sceneSettings;
+        }
+    }
     private SceneSettings sceneSettings;
+    private SphereCollider FogDestroyer
+    {
+        get
+        {
+            if (fogDestroyer == null)
+            {
+                fogDestroyer = transform.Find("FogDestroyer").GetComponent<SphereCollider>();
+            }
+            return fogDestroyer;
+        }
+    }
     private SphereCollider fogDestroyer;
 
     private int numberOfBranches = 0;
@@ -46,10 +68,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     void Start()
     {
-        sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
-        fogDestroyer = transform.Find("FogDestroyer").GetComponent<SphereCollider>();
-
-        if (sceneSettings.currentScene == SceneType.FloatingTree)
+        if (SceneSettings.currentScene == SceneType.FloatingTree)
         {
             cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
         }
@@ -57,7 +76,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     void Update()
     {
-        if (sceneSettings.currentScene == SceneType.FloatingTree || sceneSettings.currentScene == SceneType.TreeOnACliff)
+        if (SceneSettings.currentScene == SceneType.FloatingTree || SceneSettings.currentScene == SceneType.TreeOnACliff)
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
@@ -68,7 +87,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     public void ResetTree()
     {
-        if(autoGrowthCoroutine != null)
+        if (autoGrowthCoroutine != null)
             StopCoroutine(autoGrowthCoroutine);
 
         numberOfBranches = 0;
@@ -76,7 +95,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
         foreach (Transform child in transform)
         {
-            if(child.TryGetComponent(out BranchController branch))
+            if (child.TryGetComponent(out BranchController branch))
                 branch.DestroyBranch();
         }
 
@@ -99,7 +118,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     public void GenerateNewBranches()
     {
-        if(branches.Count == 0)
+        if (branches.Count == 0)
         {
             GenerateFirstBranch();
         }
@@ -110,7 +129,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
             int branchesToGenerate = (int)System.Math.Ceiling(numberOfBranches * branchGeneratorRate);
             //Debug.Log("branchesToGenerate: " + branchesToGenerate);
 
-            while(branchesToGenerate-- > 0)
+            while (branchesToGenerate-- > 0)
             {
                 int randomPos = UnityEngine.Random.Range(0, branches.Count);
                 BranchController randomBranch = branches[randomPos];
@@ -178,7 +197,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
         float radius = branchRadius * Mathf.Pow(subBranchScaleModificator, newBranchGeneration);
 
         bool rayHitSmth = Physics.CapsuleCast(head.position, head.position, radius, direction, maxDistance);
-       
+
         Debug.DrawRay(head.position, direction * maxDistance,
             rayHitSmth ? Color.red : Color.green,
             showDebugRaysSeconds, false);
@@ -198,13 +217,13 @@ public class TreeController : MonoBehaviour, ITreeElementController
         ResizeFogDestroyer();
 
         float branchDistanceFromRoot = Vector3.Distance(transform.position, pos);
-        if(branchDistanceFromRoot > furthestBranch)
+        if (branchDistanceFromRoot > furthestBranch)
         {
             //Debug.Log($"branchDistanceFromRoot: {branchDistanceFromRoot}");
             furthestBranch = branchDistanceFromRoot;
         }
 
-        if (sceneSettings.currentScene == SceneType.FloatingTree)
+        if (SceneSettings.currentScene == SceneType.FloatingTree)
         {
             UpdateBranchesText();
 
@@ -230,12 +249,12 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     private void ResizeFogDestroyer()
     {
-        fogDestroyer.radius = (furthestBranch * radiusPerFurthestBranch + radiusPerBranches * numberOfBranches) * 0.5f;
+        FogDestroyer.radius = (furthestBranch * radiusPerFurthestBranch + radiusPerBranches * numberOfBranches) * 0.5f;
     }
 
     private void UpdateBranchesText()
     {
-        if (branchesCounterText != null && sceneSettings.currentScene == SceneType.FloatingTree)
+        if (branchesCounterText != null && SceneSettings.currentScene == SceneType.FloatingTree)
         {
             branchesCounterText.text = "Branches: " + numberOfBranches;
         }
