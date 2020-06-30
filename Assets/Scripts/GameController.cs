@@ -7,11 +7,11 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reset();
+            RestartLevel();
         }
     }
 
-    public void Reset()
+    public static void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

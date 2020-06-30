@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class ResetModelXController : MonoBehaviour, ITouchable
 {
-    private GameController gameController;
-
-    void Start()
-    {
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
-    }
-
     private void OnObjectTouch()
     {
-        gameController.Reset();
+        GameController.RestartLevel();
     }
 
     void ITouchable.OnTouchDown()

@@ -26,10 +26,15 @@ public class PlayerInputHandler : MonoBehaviour
             gui.ShowMenu();
         }
 
-        if(!cursorLocked && Input.GetMouseButtonDown(0))
+        //if(Input.GetKeyDown(KeyCode.Escape) && Menu.showingMenu)
+        //{
+        //    LockCursor();
+        //    gui.HideMenu();
+        //}
+
+        if(Input.GetMouseButtonDown(0) && !cursorLocked && !Menu.showingMenu)
         {
             LockCursor();
-            gui.HideMenu();
         }
 
         if(Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)

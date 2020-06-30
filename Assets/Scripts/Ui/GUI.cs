@@ -13,8 +13,16 @@ public class GUI : MonoBehaviour
         uiLetter = transform.Find("UiLetter").GetComponent<UiLetter>();
     }
 
-    public void ShowMenu() => menu.SetActive(true);
-    public void HideMenu() => menu.SetActive(false);
+    public void ShowMenu()
+    {
+        Menu.showingMenu = true;
+        menu.SetActive(true);
+    }
+    public void HideMenu()
+    {
+        menu.SetActive(false);
+        Menu.showingMenu = false;
+    }
 
     public void ShowLetter(string text)
     {
