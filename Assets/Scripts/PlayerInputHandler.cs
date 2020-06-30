@@ -22,23 +22,20 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (cursorLocked && Input.GetKeyDown(KeyCode.Escape))
         {
+            if (DebugLog.PlayerInput) Debug.Log("ESC: Showing menu");
             UnlockCursor();
             gui.ShowMenu();
         }
 
-        //if(Input.GetKeyDown(KeyCode.Escape) && Menu.showingMenu)
-        //{
-        //    LockCursor();
-        //    gui.HideMenu();
-        //}
-
         if(Input.GetMouseButtonDown(0) && !cursorLocked && !Menu.showingMenu)
         {
+            if (DebugLog.PlayerInput) Debug.Log("LMB: Lock cursor");
             LockCursor();
         }
 
         if(Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)
         {
+            if (DebugLog.PlayerInput) Debug.Log("LMB: Hide letter");
             gui.HideLetter();
         }
     }

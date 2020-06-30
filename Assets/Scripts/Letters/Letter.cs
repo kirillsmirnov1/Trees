@@ -31,6 +31,9 @@ public class Letter : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (DebugLog.LetterOpen)
+            Debug.Log($"Letter.OnMouseDown()\nshowingAnyLetter: {showingAnyLetter}");
+
         if(!showingAnyLetter)
             gui.ShowLetter(letterTextMesh.text);
     }
