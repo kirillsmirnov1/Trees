@@ -130,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 5159102685269966444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.00001}
+  m_LocalScale: {x: 1, y: 1, z: 0.0001}
   m_Children:
   - {fileID: 5159102685685737775}
   m_Father: {fileID: 0}
@@ -208,9 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad386450f324cf4399b0806dabe4ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterText: Hi there!
-  restMaterial: {fileID: 2100000, guid: 5818e701d69d0624bbfa8b239c58ab04, type: 2}
-  showMaterial: {fileID: 2100000, guid: 6946e32ff016f4f4fbc66dd3f12ce1d5, type: 2}
   key: 
 --- !u!1 &5159102685685737772
 GameObject:
