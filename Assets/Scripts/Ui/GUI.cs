@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GUI : MonoBehaviour
 {
-    public UiLetter uiLetter; // TODO find from code
+    private UiLetter uiLetter;
     private GameObject menu;
 
     private void Start()
     {
         menu = transform.Find("Menu").gameObject;
+        uiLetter = transform.Find("UiLetter").GetComponent<UiLetter>();
     }
 
     public void ShowMenu() => menu.SetActive(true);
