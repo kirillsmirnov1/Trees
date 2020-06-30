@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class GUI : MonoBehaviour
 {
-    public UiLetter uiLetter;
+    public UiLetter uiLetter; // TODO find from code
+    private GameObject menu;
+
+    private void Start()
+    {
+        menu = transform.Find("Menu").gameObject;
+    }
+
+    public void ShowMenu() => menu.SetActive(true);
+    public void HideMenu() => menu.SetActive(false);
 
     public void ShowLetter(string text)
     {

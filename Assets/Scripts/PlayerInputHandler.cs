@@ -23,11 +23,13 @@ public class PlayerInputHandler : MonoBehaviour
         if (cursorLocked && Input.GetKeyDown(KeyCode.Escape))
         {
             UnlockCursor();
+            gui.ShowMenu();
         }
 
         if(!cursorLocked && Input.GetMouseButtonDown(0))
         {
             LockCursor();
+            gui.HideMenu();
         }
 
         if(Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)
