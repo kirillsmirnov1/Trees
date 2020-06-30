@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class UiLetter : MonoBehaviour
 {
+    private string key;
+
     private TextMeshProUGUI LetterTextMesh
     {
         get
@@ -17,8 +19,18 @@ public class UiLetter : MonoBehaviour
     }
     private TextMeshProUGUI letterTextMesh;
 
-    public void SetText(string text)
+    public void Show(string key, string text)
     {
+        gameObject.SetActive(true);
         LetterTextMesh.text = text;
+        this.key = key;
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+
+        if (key == "final")
+            Debug.Log("Game Over");
     }
 }

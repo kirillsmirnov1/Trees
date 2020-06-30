@@ -24,16 +24,15 @@ public class GUI : MonoBehaviour
         Menu.showingMenu = false;
     }
 
-    public void ShowLetter(string text)
+    public void ShowLetter(string key, string text)
     {
-        uiLetter.gameObject.SetActive(true);
-        uiLetter.SetText(text);
+        uiLetter.Show(key, text);
         StartCoroutine(DelayMessageAboutLetterBeingShown());
     }
 
     public void HideLetter()
     {
-        uiLetter.gameObject.SetActive(false);
+        uiLetter.Hide();
         Letter.UiLetterIsHidden();
     }
 
