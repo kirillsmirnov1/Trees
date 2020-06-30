@@ -68,7 +68,8 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     public void ResetTree()
     {
-        StopCoroutine(autoGrowthCoroutine);
+        if(autoGrowthCoroutine != null)
+            StopCoroutine(autoGrowthCoroutine);
 
         numberOfBranches = 0;
         furthestBranch = 0;
@@ -159,7 +160,6 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
             newBranch = subBranch.GetComponent<BranchController>();
 
-            newBranch.SetTreeReference(this);
             newBranch.generation = newBranchGeneration;
         }
         else
@@ -189,13 +189,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
     private void GenerateFirstBranch()
     {
         BranchController branch = Instantiate(branchPrefab, transform).GetComponent<BranchController>();
-        SetTreeReference(branch);
         branches.Add(branch);
-    }
-
-    private void SetTreeReference(BranchController branch)
-    {
-        branch.SetTreeReference(this);
     }
 
     public void CheckNewBranch(Vector3 pos)

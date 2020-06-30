@@ -15,6 +15,7 @@ public class BranchController : MonoBehaviour, ITreeElementController
 
     private void Start()
     {
+        TreeController = transform.GetComponentInParent<TreeController>();
         TreeController.CheckNewBranch(transform.position);
 
         transform.localScale = Vector3.zero;
@@ -24,11 +25,6 @@ public class BranchController : MonoBehaviour, ITreeElementController
         float growthDelay = generation < 3 ? 0f : Random.Range(0f, TreeController.maxGrowthDelay);
 
         StartCoroutine(Grow(maxScale, growthSpeed, growthDelay));
-    }
-
-    public void SetTreeReference(TreeController treeReference)
-    {
-        TreeController = treeReference;
     }
 
     private IEnumerator Grow(float resultScaleMod, float growthSpeed, float growthDelay = 0f, bool destroyInTheEnd = false)
