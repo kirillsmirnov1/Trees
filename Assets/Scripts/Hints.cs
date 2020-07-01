@@ -13,12 +13,12 @@ public class Hints : MonoBehaviour
         Destroying
     }
 
-    private static readonly Dictionary<string, string> Text = new Dictionary<string, string>
+    private static readonly Dictionary<Entry, string> Text = new Dictionary<Entry, string>
     {
-        [Entry.Walk.ToString()]         = "Нажимай WASD чтобы ходить",
-        [Entry.Interaction.ToString()]  = "Нажимай на письма и сферы левой кнопкой мыши",
-        [Entry.Growing.ToString()]      = "E + левая кнопка мыши = быстрый рост дерева",
-        [Entry.Destroying.ToString()]   = "Q + ЛКМ = уничтожение дерева"
+        [Entry.Walk]         = "Нажимай WASD чтобы ходить",
+        [Entry.Interaction]  = "Нажимай на письма и сферы левой кнопкой мыши",
+        [Entry.Growing]      = "E + левая кнопка мыши = быстрый рост дерева",
+        [Entry.Destroying]   = "Q + ЛКМ = уничтожение дерева"
     };
 
     private Animator animator;
@@ -53,7 +53,7 @@ public class Hints : MonoBehaviour
     {
         if (DebugLog.Hints) Debug.Log($"Hints.ActuallyShowHint({entry})");
 
-        text.text = Text[entry.ToString()];
+        text.text = Text[entry];
 
         animator.SetBool("showing", true);
 
