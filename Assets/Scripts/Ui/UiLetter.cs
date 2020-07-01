@@ -33,7 +33,7 @@ public class UiLetter : MonoBehaviour
         switch (key)
         {
             case "08": Hints.Show(Hints.Entry.Destroying); break;
-            // TODO case "": Hints.Show(Hints.Entry.Growing); break;
+            case "03": Hints.Show(Hints.Entry.Growing); break;
             case "final": Debug.Log("Game Over"); break;
         }
     }
