@@ -5,7 +5,7 @@ using UnityEngine;
 public class Letter : MonoBehaviour
 {
     [Tooltip("Unique letter key. Used for getting text from storage")]
-    public string key = null;
+    public LettersText.Entry key;
 
     /// <summary>
     /// Tells if any layer on scene is shown right now. Use it when checking if player can move
@@ -23,9 +23,7 @@ public class Letter : MonoBehaviour
         letterTextMesh = transform.Find("Text").GetComponent<TextMeshPro>();
         gui = GameObject.Find("GUI").GetComponent<GUI>();
 
-        letterTextMesh.text = LetterTextStorage.Text.ContainsKey(key)
-            ? LetterTextStorage.Text[key]
-            : "NO TEXT FOUND SEND HELP IMMEDIATELY";
+        letterTextMesh.text = LettersText.Get(key);
 
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UiLetter : MonoBehaviour
 {
-    private string key;
+    private LettersText.Entry key;
 
     private TextMeshProUGUI LetterTextMesh
     {
@@ -19,7 +19,7 @@ public class UiLetter : MonoBehaviour
     }
     private TextMeshProUGUI letterTextMesh;
 
-    public void Show(string key, string text)
+    public void Show(LettersText.Entry key, string text)
     {
         gameObject.SetActive(true);
         LetterTextMesh.text = text;
@@ -32,9 +32,9 @@ public class UiLetter : MonoBehaviour
 
         switch (key)
         {
-            case "08": Hints.Show(Hints.Entry.Destroying); break;
-            case "03": Hints.Show(Hints.Entry.Growing); break;
-            case "final": Debug.Log("Game Over"); break;
+            case LettersText.Entry.L08: Hints.Show(Hints.Entry.Destroying); break;
+            case LettersText.Entry.L03: Hints.Show(Hints.Entry.Growing); break;
+            case LettersText.Entry.Final: Debug.Log("Game Over"); break;
         }
     }
 }

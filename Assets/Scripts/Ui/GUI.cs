@@ -24,7 +24,7 @@ public class GUI : MonoBehaviour
         Menu.showingMenu = false;
     }
 
-    public void ShowLetter(string key, string text)
+    public void ShowLetter(LettersText.Entry key, string text)
     {
         uiLetter.Show(key, text);
         StartCoroutine(DelayMessageAboutLetterBeingShown());
