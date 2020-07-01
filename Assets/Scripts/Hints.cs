@@ -10,7 +10,8 @@ public class Hints : MonoBehaviour
         Walk,
         Interaction,
         Growing,
-        Destroying
+        Destroying,
+        End
     }
 
     private static readonly Dictionary<Entry, string> Text = new Dictionary<Entry, string>
@@ -18,7 +19,8 @@ public class Hints : MonoBehaviour
         [Entry.Walk]         = "Нажимай WASD чтобы ходить",
         [Entry.Interaction]  = "Нажимай на письма и сферы левой кнопкой мыши",
         [Entry.Growing]      = "E + левая кнопка мыши = быстрый рост дерева",
-        [Entry.Destroying]   = "Q + ЛКМ = уничтожение дерева"
+        [Entry.Destroying]   = "Q + ЛКМ = уничтожение дерева",
+        [Entry.End]          = "Спасибо за игру"
     };
 
     private Animator animator;

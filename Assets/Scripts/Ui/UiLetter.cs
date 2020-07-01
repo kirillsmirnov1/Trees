@@ -32,9 +32,9 @@ public class UiLetter : MonoBehaviour
 
         switch (key)
         {
-            case LettersText.Entry.L08: Hints.Show(Hints.Entry.Destroying); break;
             case LettersText.Entry.L03: Hints.Show(Hints.Entry.Growing); break;
-            case LettersText.Entry.Final: Debug.Log("Game Over"); break;
+            case LettersText.Entry.L08: Hints.Show(Hints.Entry.Destroying); break;
+            case LettersText.Entry.Final: Hints.Show(Hints.Entry.End); break;
         }
     }
 }
