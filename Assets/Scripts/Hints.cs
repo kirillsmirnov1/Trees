@@ -47,6 +47,8 @@ public class Hints : MonoBehaviour
 
     private IEnumerator ActuallyShowHint(Entry entry)
     {
+        yield return null; // Delay one frame for Start method to finish
+
         if (DebugLog.Hints) Debug.Log($"Hints.ActuallyShowHint({entry})");
 
         text.text = Text[entry];
