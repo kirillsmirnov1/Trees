@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
     private GUI gui;
 
     private static bool cursorLocked = true;
+    private float letterWasClosedAt;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,22 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (DebugLog.PlayerInput) Debug.Log("LMB: Hide letter");
             gui.HideLetter();
+            letterWasClosedAt = Time.time;
         }
+
+#if (UNITY_WEBGL) // Webgl version can't lock cursor in screen center, so we need to send our own messages
+        if (Input.GetMouseButtonDown(0) 
+            && Time.time - letterWasClosedAt > 0.1f) // So letter won't open back again instantly after closing
+        {
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            foreach (var hit in hits)
+            {
+                hit.collider.gameObject.SendMessage("OnMouseDown");
+            }
+        }
+#endif
+
         if (DebugLog.MouseRaycast && Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
