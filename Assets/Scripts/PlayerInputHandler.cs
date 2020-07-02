@@ -38,6 +38,15 @@ public class PlayerInputHandler : MonoBehaviour
             if (DebugLog.PlayerInput) Debug.Log("LMB: Hide letter");
             gui.HideLetter();
         }
+        if (DebugLog.MouseRaycast && Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            foreach (var hit in hits)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
+        }
     }
 
     public static void LockCursor()
