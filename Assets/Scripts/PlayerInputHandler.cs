@@ -27,13 +27,13 @@ public class PlayerInputHandler : MonoBehaviour
             gui.ShowMenu();
         }
 
-        if(Input.GetMouseButtonDown(0) && !cursorLocked && !Menu.showingMenu)
+        if (Input.GetMouseButtonDown(0) && !cursorLocked && !Menu.showingMenu)
         {
             if (DebugLog.PlayerInput) Debug.Log("LMB: Lock cursor");
             LockCursor();
         }
 
-        if(Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)
+        if (Input.GetMouseButtonDown(0) && Letter.ShowingAnyLetter)
         {
             if (DebugLog.PlayerInput) Debug.Log("LMB: Hide letter");
             gui.HideLetter();
