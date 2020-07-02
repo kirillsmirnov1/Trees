@@ -26,7 +26,7 @@ public class Hints : MonoBehaviour
     private Animator animator;
     private TextMeshProUGUI text;
 
-    private static readonly Queue<Entry> hintsToShow = new Queue<Entry>();
+    private readonly Queue<Entry> hintsToShow = new Queue<Entry>();
     private Coroutine animationCoroutine = null;
 
     private void Start()
@@ -36,19 +36,13 @@ public class Hints : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    public static void Show(Entry entry)
+    public void Show(Entry entry)
     {
         if (DebugLog.Hints) Debug.Log($"Hints.Show({entry})");
         hintsToShow.Enqueue(entry);
-    }
 
-    private void Update()
-    {
-        if(hintsToShow.Count > 0 && animationCoroutine == null)
-        {
-            if (DebugLog.Hints) Debug.Log("Hints.Update() if called");
+        if(animationCoroutine == null)
             animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
-        }
     }
 
     private IEnumerator ActuallyShowHint(Entry entry)
@@ -65,6 +59,9 @@ public class Hints : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        animationCoroutine = null;
+        if(hintsToShow.Count > 0)
+            animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
+        else
+            animationCoroutine = null;
     }
 }

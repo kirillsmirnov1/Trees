@@ -3,11 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    private Hints hints;
     private void Start()
     {
         if (DebugLog.Hints) Debug.Log("GameController sends requests to Hints");
-        Hints.Show(Hints.Entry.Walk);
-        Hints.Show(Hints.Entry.Interaction);
+
+        hints = GameObject.Find("Hint").GetComponent<Hints>();
+
+        hints.Show(Hints.Entry.Walk);
+        hints.Show(Hints.Entry.Interaction);
     }
 
     void Update()

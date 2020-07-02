@@ -19,6 +19,19 @@ public class UiLetter : MonoBehaviour
     }
     private TextMeshProUGUI letterTextMesh;
 
+    private Hints HintsRef
+    {
+        get
+        {
+            if(hints == null)
+            {
+                hints = GameObject.Find("Hint").GetComponent<Hints>();
+            }
+            return hints;
+        }
+    }
+    private Hints hints;
+
     public void Show(LettersText.Entry key, string text)
     {
         gameObject.SetActive(true);
@@ -32,9 +45,9 @@ public class UiLetter : MonoBehaviour
 
         switch (key)
         {
-            case LettersText.Entry.L03: Hints.Show(Hints.Entry.Growing); break;
-            case LettersText.Entry.L08: Hints.Show(Hints.Entry.Destroying); break;
-            case LettersText.Entry.Final: Hints.Show(Hints.Entry.End); break;
+            case LettersText.Entry.L03: HintsRef.Show(Hints.Entry.Growing); break;
+            case LettersText.Entry.L08: HintsRef.Show(Hints.Entry.Destroying); break;
+            case LettersText.Entry.Final: HintsRef.Show(Hints.Entry.End); break;
         }
     }
 }
