@@ -34,30 +34,11 @@ public class TreeController : MonoBehaviour, ITreeElementController
     TreeController ITreeElementController.TreeController => this;
 
     private CameraController cameraController;
-    private SceneSettings SceneSettings
-    {
-        get
-        {
-            if (sceneSettings == null)
-            {
-                sceneSettings = GameObject.Find("SceneSettings").GetComponent<SceneSettings>();
-            }
-            return sceneSettings;
-        }
-    }
-    private SceneSettings sceneSettings;
-    private SphereCollider FogDestroyer
-    {
-        get
-        {
-            if (fogDestroyer == null)
-            {
-                fogDestroyer = transform.Find("FogDestroyer").GetComponent<SphereCollider>();
-            }
-            return fogDestroyer;
-        }
-    }
-    private SphereCollider fogDestroyer;
+    private SceneSettings SceneSettings => sceneSettings.Value;
+    private readonly Lazy<SceneSettings> sceneSettings 
+        = new Lazy<SceneSettings>(() => GameObject.Find("SceneSettings").GetComponent<SceneSettings>());
+    private SphereCollider FogDestroyer => fogDestroyer.Value;
+    private Lazy<SphereCollider> fogDestroyer;
 
     private int numberOfBranches = 0;
     private float furthestBranch = 0f;
@@ -66,8 +47,10 @@ public class TreeController : MonoBehaviour, ITreeElementController
     private readonly List<BranchController> branches = new List<BranchController>();
     private Coroutine autoGrowthCoroutine;
 
-    void Start()
+    void Awake()
     {
+        fogDestroyer = new Lazy<SphereCollider>(() => transform.Find("FogDestroyer").GetComponent<SphereCollider>());
+
         if (SceneSettings.currentScene == SceneType.FloatingTree)
         {
             cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
