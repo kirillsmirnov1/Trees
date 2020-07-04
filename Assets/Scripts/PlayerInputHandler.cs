@@ -42,6 +42,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0) 
+            && Cursor.visible == false
             && Time.time - letterWasClosedAt > 0.1f) // So letter won't open back again instantly after closing
         {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
