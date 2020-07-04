@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public Button RuLocaleButton;
+    public Button EnLocaleButton;
+
     public static bool showingMenu = false;
 
     public void OnContinueClick()
@@ -22,5 +24,10 @@ public class Menu : MonoBehaviour
     public void OnExitClick()
     {
         Application.Quit();
+    }
+
+    public void LocaleButtonClick(Locale.Language language)
+    {
+        Locale.UpdateLocale(language);
     }
 }
