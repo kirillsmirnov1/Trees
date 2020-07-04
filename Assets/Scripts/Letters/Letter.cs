@@ -23,13 +23,18 @@ public class Letter : MonoBehaviour, ITouchable
         letterTextMesh = transform.Find("Text").GetComponent<TextMeshPro>();
         gui = GameObject.Find("GUI").GetComponent<GUI>();
 
-        letterTextMesh.text = LettersText.Get(key);
 
+        SetText();
     }
 
     internal static void UiLetterIsShown()
     {
         showingAnyLetter = true;
+    }
+
+    internal void SetText()
+    {
+        letterTextMesh.text = LettersText.Get(key);
     }
 
     internal static void UiLetterIsHidden()
