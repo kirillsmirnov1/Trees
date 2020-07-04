@@ -45,6 +45,6 @@ public class Menu : MonoBehaviour
 
     public void LocaleButtonClick(Locale.Language language)
     {
-        Locale.UpdateLocale(language);
+        LocaleController.UpdateLocale(language);
     }
 }
