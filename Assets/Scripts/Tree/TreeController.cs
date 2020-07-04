@@ -87,7 +87,13 @@ public class TreeController : MonoBehaviour, ITreeElementController
     }
     public void GrowFullTree()
     {
-        autoGrowthCoroutine = StartCoroutine(GenerateAllBranches());
+        if (autoGrowthCoroutine == null)
+            autoGrowthCoroutine = StartCoroutine(GenerateAllBranches());
+        else // second click stops growing
+        {
+            StopCoroutine(autoGrowthCoroutine);
+            autoGrowthCoroutine = null; 
+        }
     }
 
     private IEnumerator GenerateAllBranches()
@@ -97,6 +103,8 @@ public class TreeController : MonoBehaviour, ITreeElementController
             GenerateNewBranches();
             yield return new WaitForSeconds(0.1f);
         }
+
+        autoGrowthCoroutine = null;
     }
 
     public void GenerateNewBranches()
