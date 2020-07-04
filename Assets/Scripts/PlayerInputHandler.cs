@@ -46,11 +46,9 @@ public class PlayerInputHandler : MonoBehaviour
             && Time.time - letterWasClosedAt > 0.1f) // So letter won't open back again instantly after closing
         {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit[] hits = Physics.RaycastAll(ray);
-            foreach (var hit in hits)
-            {
-                hit.collider.gameObject.SendMessage("OnMouseDown");
-            }
+            RaycastHit[] hits = Physics.RaycastAll(ray, 10);
+            if(hits.Length > 0)
+                hits[0].collider.gameObject.SendMessage("OnMouseDown");
         }
 #endif
 
