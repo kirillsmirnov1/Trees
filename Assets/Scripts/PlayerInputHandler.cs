@@ -47,7 +47,7 @@ public class PlayerInputHandler : MonoBehaviour
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             RaycastHit[] hits = Physics.RaycastAll(ray, 10);
             if(hits.Length > 0)
-                hits[0].collider.gameObject.SendMessage("OnClick");
+                hits[0].collider.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
         }
 
         if (DebugLog.MouseRaycast && Input.GetMouseButtonDown(1))
