@@ -14,14 +14,27 @@ public class Hints : MonoBehaviour
         End
     }
 
-    private static readonly Dictionary<Entry, string> Text = new Dictionary<Entry, string>
-    {
-        [Entry.Walk]         = "Нажимай WASD чтобы ходить",
-        [Entry.Interaction]  = "Нажимай на письма и сферы левой кнопкой мыши",
-        [Entry.Growing]      = "E + левая кнопка мыши = быстрый рост дерева",
-        [Entry.Destroying]   = "Q + ЛКМ = уничтожение дерева",
-        [Entry.End]          = "Спасибо за игру"
-    };
+    private static readonly Dictionary<Locale.Language, Dictionary<Entry, string>> Text =
+        new Dictionary<Locale.Language, Dictionary<Entry, string>>
+        {
+            [Locale.Language.Ru] = new Dictionary<Entry, string>
+            {
+                [Entry.Walk] = "Нажимай WASD чтобы ходить",
+                [Entry.Interaction] = "Нажимай на письма и сферы левой кнопкой мыши",
+                [Entry.Growing] = "E + левая кнопка мыши = быстрый рост дерева",
+                [Entry.Destroying] = "Q + ЛКМ = уничтожение дерева",
+                [Entry.End] = "Спасибо за игру"
+            },
+
+            [Locale.Language.En] = new Dictionary<Entry, string>
+            {
+                [Entry.Walk] = "Press WASD to walk",
+                [Entry.Interaction] = "Click letters and spheres with left mouse button",
+                [Entry.Growing] = "E + left mouse button = fast tree growth",
+                [Entry.Destroying] = "Q + LMB destroys tree",
+                [Entry.End] = "Thanks for playing!"
+            }
+        };
 
     private Animator animator;
     private TextMeshProUGUI text;
@@ -41,7 +54,7 @@ public class Hints : MonoBehaviour
         if (DebugLog.Hints) Debug.Log($"Hints.Show({entry})");
         hintsToShow.Enqueue(entry);
 
-        if(animationCoroutine == null)
+        if (animationCoroutine == null)
             animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
     }
 
@@ -51,7 +64,7 @@ public class Hints : MonoBehaviour
 
         if (DebugLog.Hints) Debug.Log($"Hints.ActuallyShowHint({entry})");
 
-        text.text = Text[entry];
+        text.text = Text[Locale.language][entry];
 
         animator.SetBool("showing", true);
 
@@ -61,7 +74,7 @@ public class Hints : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        if(hintsToShow.Count > 0)
+        if (hintsToShow.Count > 0)
             animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
         else
             animationCoroutine = null;
