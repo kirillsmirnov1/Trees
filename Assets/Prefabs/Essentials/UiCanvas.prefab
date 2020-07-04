@@ -865,6 +865,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6971c85e7ce90714dbd357046bd378c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ContinueButtonText: {fileID: 1238157730}
+  RestartButtonText: {fileID: 1503693643}
+  ExitButtonText: {fileID: 1571123681}
   RuLocaleButton: {fileID: 1566934252}
   EnLocaleButton: {fileID: 3183123433191808724}
 --- !u!1 &1117650378

@@ -10,8 +10,12 @@ public class Locale : MonoBehaviour
         Locale.language = language;
 
         UpdateLettersLocale();
-        // TODO hints
-        // TODO menu
+        UpdateMenuLocale();
+    }
+
+    private static void UpdateMenuLocale()
+    {
+        FindObjectOfType<Menu>().SetText();
     }
 
     private static void UpdateLettersLocale()
