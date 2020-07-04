@@ -37,7 +37,7 @@ public class TreeElementInputHandler : MonoBehaviour, ITouchable
         }
     }
 
-    public void OnTouchDown()
+    public void OnClick()
     {
         OnObjectTouch();
     }

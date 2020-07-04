@@ -1,4 +1,4 @@
 ﻿public interface ITouchable
 {
-    void OnTouchDown();
+    void OnClick();
 }

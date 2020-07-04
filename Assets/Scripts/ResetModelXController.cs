@@ -9,7 +9,7 @@ public class ResetModelXController : MonoBehaviour, ITouchable
         GameController.RestartLevel();
     }
 
-    void ITouchable.OnTouchDown()
+    void ITouchable.OnClick()
     {
         OnObjectTouch();
     }

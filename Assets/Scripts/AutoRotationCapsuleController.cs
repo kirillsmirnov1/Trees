@@ -16,7 +16,7 @@ public class AutoRotationCapsuleController : MonoBehaviour, ITouchable
         cameraController.FlipRotationFlag();
     }
 
-    void ITouchable.OnTouchDown()
+    void ITouchable.OnClick()
     {
         OnObjectTouch();
     }
