@@ -41,16 +41,14 @@ public class PlayerInputHandler : MonoBehaviour
             letterWasClosedAt = Time.time;
         }
 
-#if (UNITY_WEBGL) // Webgl version can't lock cursor in screen center, so we need to send our own messages
         if (Input.GetMouseButtonDown(0) 
             && Time.time - letterWasClosedAt > 0.1f) // So letter won't open back again instantly after closing
         {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             RaycastHit[] hits = Physics.RaycastAll(ray, 10);
             if(hits.Length > 0)
-                hits[0].collider.gameObject.SendMessage("OnMouseDown");
+                hits[0].collider.gameObject.SendMessage("OnClick");
         }
-#endif
 
         if (DebugLog.MouseRaycast && Input.GetMouseButtonDown(1))
         {

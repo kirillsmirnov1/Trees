@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Letter : MonoBehaviour
+public class Letter : MonoBehaviour, ITouchable
 {
     [Tooltip("Unique letter key. Used for getting text from storage")]
     public LettersText.Entry key;
@@ -27,15 +27,6 @@ public class Letter : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
-    {
-        if (DebugLog.LetterOpen)
-            Debug.Log($"Letter.OnMouseDown()\nshowingAnyLetter: {showingAnyLetter}");
-
-        if(!showingAnyLetter)
-            gui.ShowLetter(key, letterTextMesh.text);
-    }
-
     internal static void UiLetterIsShown()
     {
         showingAnyLetter = true;
@@ -44,5 +35,20 @@ public class Letter : MonoBehaviour
     internal static void UiLetterIsHidden()
     {
         showingAnyLetter = false;
+    }
+
+    private void OnObjectClick()
+    {
+        if (DebugLog.LetterOpen)
+            Debug.Log($"Letter.OnMouseDown()\nshowingAnyLetter: {showingAnyLetter}");
+
+        if (!showingAnyLetter)
+            gui.ShowLetter(key, letterTextMesh.text);
+
+    }
+
+    public void OnClick()
+    {
+        OnObjectClick();
     }
 }

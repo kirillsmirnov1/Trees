@@ -16,12 +16,7 @@ public class TreeElementInputHandler : MonoBehaviour, ITouchable
         } 
     }
 
-    private void OnMouseDown()
-    {
-        OnObjectTouch();
-    }
-
-    private void OnObjectTouch()
+    private void OnObjectClick()
     {
         if (Input.GetKey(KeyCode.Q))
         {
@@ -39,6 +34,6 @@ public class TreeElementInputHandler : MonoBehaviour, ITouchable
 
     public void OnClick()
     {
-        OnObjectTouch();
+        OnObjectClick();
     }
 }
