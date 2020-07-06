@@ -1,36 +1,21 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class UiLetter : MonoBehaviour
 {
     private LettersText.Entry key;
 
-    private TextMeshProUGUI LetterTextMesh
-    {
-        get
-        {
-            if(letterTextMesh == null)
-            {
-                letterTextMesh = transform.Find("Text").GetComponent<TextMeshProUGUI>();
-            }
+    private TextMeshProUGUI LetterTextMesh => _letterTextMesh;
+    private TextMeshProUGUI _letterTextMesh;
 
-            return letterTextMesh;
-        }
-    }
-    private TextMeshProUGUI letterTextMesh;
+    private Hints HintsRef => _hints.Value;
+    private readonly Lazy<Hints> _hints = new Lazy<Hints>(() => GameObject.Find("Hint").GetComponent<Hints>());
 
-    private Hints HintsRef
+    private void Awake()
     {
-        get
-        {
-            if(hints == null)
-            {
-                hints = GameObject.Find("Hint").GetComponent<Hints>();
-            }
-            return hints;
-        }
+        _letterTextMesh = transform.Find("Text").GetComponent<TextMeshProUGUI>();
     }
-    private Hints hints;
 
     public void Show(LettersText.Entry key, string text)
     {
