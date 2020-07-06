@@ -8,8 +8,9 @@ public class Hints : MonoBehaviour
     public enum Entry
     {
         Walk,
-        Interaction,
-        Growing,
+        Letters,
+        Grow,
+        FastGrow,
         Destroying,
         End
     }
@@ -20,18 +21,20 @@ public class Hints : MonoBehaviour
             [Locale.Language.Ru] = new Dictionary<Entry, string>
             {
                 [Entry.Walk] = "Нажимай WASD чтобы ходить",
-                [Entry.Interaction] = "Нажимай на письма и сферы левой кнопкой мыши",
-                [Entry.Growing] = "E + левая кнопка мыши = быстрый рост дерева",
-                [Entry.Destroying] = "Q + ЛКМ = уничтожение дерева",
+                [Entry.Letters] = "Нажимай на письма левой кнопкой мыши",
+                [Entry.Grow] = "Нажимай на корневище и ветки дерева, чтобы оно росло",
+                [Entry.FastGrow] = "E + клик = быстрый рост дерева",
+                [Entry.Destroying] = "Q + клик = уничтожение дерева",
                 [Entry.End] = "Спасибо за игру"
             },
 
             [Locale.Language.En] = new Dictionary<Entry, string>
             {
                 [Entry.Walk] = "Press WASD to walk",
-                [Entry.Interaction] = "Click letters and spheres with left mouse button",
-                [Entry.Growing] = "E + left mouse button = fast tree growth",
-                [Entry.Destroying] = "Q + LMB destroys tree",
+                [Entry.Letters] = "Click letters and spheres with left mouse button",
+                [Entry.Grow] = "Click on root and branches of tree for it to grow",
+                [Entry.FastGrow] = "E + click = fast tree growth",
+                [Entry.Destroying] = "Q + click destroys tree",
                 [Entry.End] = "Thanks for playing!"
             }
         };

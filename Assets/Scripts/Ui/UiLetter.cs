@@ -30,7 +30,8 @@ public class UiLetter : MonoBehaviour
 
         switch (key)
         {
-            case LettersText.Entry.L03: HintsRef.Show(Hints.Entry.Growing); break;
+            case LettersText.Entry.L01: HintsRef.Show(Hints.Entry.Grow); break;
+            case LettersText.Entry.L04: HintsRef.Show(Hints.Entry.FastGrow); break;
             case LettersText.Entry.L08: HintsRef.Show(Hints.Entry.Destroying); break;
             case LettersText.Entry.Final: HintsRef.Show(Hints.Entry.End); break;
         }

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
         hints = GameObject.Find("Hint").GetComponent<Hints>();
 
         hints.Show(Hints.Entry.Walk);
-        hints.Show(Hints.Entry.Interaction);
+        hints.Show(Hints.Entry.Letters);
     }
 
     void Update()
