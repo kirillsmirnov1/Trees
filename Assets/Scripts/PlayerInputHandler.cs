@@ -41,19 +41,21 @@ public class PlayerInputHandler : MonoBehaviour
             letterWasClosedAt = Time.time;
         }
 
-        if (Input.GetMouseButtonDown(0) 
+        if (Input.GetMouseButtonDown(0)
             && Cursor.visible == false
             && Time.time - letterWasClosedAt > 0.1f) // So letter won't open back again instantly after closing
         {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit[] hits = Physics.RaycastAll(ray, 10);
-            if(hits.Length > 0)
-                hits[0].collider.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            foreach (var hit in hits)
+            {
+                hit.collider.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
+            }
         }
 
         if (DebugLog.MouseRaycast && Input.GetMouseButtonDown(1))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             RaycastHit[] hits = Physics.RaycastAll(ray);
             foreach (var hit in hits)
             {
