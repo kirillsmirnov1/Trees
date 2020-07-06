@@ -43,6 +43,7 @@ public class Hints : MonoBehaviour
     private TextMeshProUGUI text;
 
     private readonly Queue<Entry> hintsToShow = new Queue<Entry>();
+    private readonly HashSet<Entry> shownHints = new HashSet<Entry>();
     private Coroutine animationCoroutine = null;
 
     private void Awake()
@@ -55,10 +56,14 @@ public class Hints : MonoBehaviour
     public void Show(Entry entry)
     {
         if (DebugLog.Hints) Debug.Log($"Hints.Show({entry})");
-        hintsToShow.Enqueue(entry);
 
-        if (animationCoroutine == null)
-            animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
+        if (shownHints.Add(entry)) //Show every hint only once
+        {
+            hintsToShow.Enqueue(entry);
+
+            if (animationCoroutine == null)
+                animationCoroutine = StartCoroutine(ActuallyShowHint(hintsToShow.Dequeue()));
+        }
     }
 
     private IEnumerator ActuallyShowHint(Entry entry)
