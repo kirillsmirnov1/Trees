@@ -20,22 +20,22 @@ public class Hints : MonoBehaviour
         {
             [Locale.Language.Ru] = new Dictionary<Entry, string>
             {
-                [Entry.Walk] = "Нажимай WASD чтобы ходить",
-                [Entry.Letters] = "Нажимай на письма левой кнопкой мыши",
-                [Entry.Grow] = "Нажимай на корневище и ветки дерева, чтобы оно росло",
-                [Entry.FastGrow] = "E + клик = быстрый рост дерева",
-                [Entry.Destroying] = "Q + клик = уничтожение дерева",
-                [Entry.End] = "Спасибо за игру"
+                [Entry.Walk]        = "Нажимай WASD чтобы ходить",
+                [Entry.Letters]     = "Нажимай на письма левой кнопкой мыши",
+                [Entry.Grow]        = "Нажимай на корневище и ветки дерева, чтобы оно росло",
+                [Entry.FastGrow]    = "E + клик = быстрый рост дерева",
+                [Entry.Destroying]  = "Q + клик = уничтожение дерева",
+                [Entry.End]         = "Спасибо за игру"
             },
 
             [Locale.Language.En] = new Dictionary<Entry, string>
             {
-                [Entry.Walk] = "Press WASD to walk",
-                [Entry.Letters] = "Click letters and spheres with left mouse button",
-                [Entry.Grow] = "Click on root and branches of tree for it to grow",
-                [Entry.FastGrow] = "E + click = fast tree growth",
-                [Entry.Destroying] = "Q + click destroys tree",
-                [Entry.End] = "Thanks for playing!"
+                [Entry.Walk]        = "Press WASD to walk",
+                [Entry.Letters]     = "Click on letters with left mouse button",
+                [Entry.Grow]        = "Click on root and branches of tree for it to grow",
+                [Entry.FastGrow]    = "E + click = fast tree growth",
+                [Entry.Destroying]  = "Q + click destroys tree",
+                [Entry.End]         = "Thanks for playing!"
             }
         };
 
