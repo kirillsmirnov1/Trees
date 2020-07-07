@@ -20,6 +20,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
     public float branchGeneratorRate = 0.25f;
     public float maxGrowthDelay = 0.5f;
     public float branchGrowthSpeed = 1f;
+    public float branchDestroySpeed = 0.125f;
 
     [Header("Fog destroyer")]
     public float radiusPerFurthestBranch = 2f;

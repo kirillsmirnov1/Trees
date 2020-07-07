@@ -64,7 +64,7 @@ public class BranchController : MonoBehaviour, ITreeElementController
         StartCoroutine(
             Grow(
                 resultScaleMod: 0f, 
-                growthSpeed: TreeController.branchGrowthSpeed / 2, 
+                growthSpeed: TreeController.branchDestroySpeed, 
                 destroyInTheEnd: true
                 )
             );
