@@ -75,7 +75,7 @@ public class LettersText : MonoBehaviour
             {
                 [Entry.NoData] = "NO DATA SEND HELP",
 
-                [Entry.L01] = "Out of the corner of my eye I saw how one little girl put her hands to the trunk of a tree, whispered something to it, and the tree released a new twig.The girl picked a twig and ran away right away.The villagers say that girl was on of the forest people." +
+                [Entry.L01] = "Out of the corner of my eye I saw how one little girl put her hands to the trunk of a tree, whispered something to it, and the tree released a new twig.The girl picked a twig and ran away right away.The villagers say that girl was one of the forest people." +
                 "\n\nThat is good news for me. Academy, of course, sent me to scout the forest for harvesting, but I still hope to benefit science as well",
 
                 [Entry.L02] = "Today, success was waiting for me! I noticed a man in the forest. Dark skin, dark hair, woven clothes, everything was just like in an encyclopedia. I tried to follow him, but was detected quickly. Fortunately, Mar turned out to be a good-natured person. He even speaks in broken Naori. " + 
