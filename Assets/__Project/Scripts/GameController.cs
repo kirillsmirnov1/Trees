@@ -8,10 +8,13 @@ public class GameController : MonoBehaviour
     {
         if (DebugLog.Hints) Debug.Log("GameController sends requests to Hints");
 
-        hints = GameObject.Find("Hint").GetComponent<Hints>();
+        if (SceneSettings.Instance.currentScene == SceneSettings.SceneType.MainScene)
+        {
+            hints = GameObject.Find("Hint").GetComponent<Hints>();
 
-        hints.Show(Hints.Entry.Walk);
-        hints.Show(Hints.Entry.Letters);
+            hints.Show(Hints.Entry.Walk);
+            hints.Show(Hints.Entry.Letters);
+        }
     }
 
     void Update()
