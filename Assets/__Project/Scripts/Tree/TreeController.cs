@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static SceneSettings;
 
 public class TreeController : MonoBehaviour, ITreeElementController
 {
@@ -35,9 +34,6 @@ public class TreeController : MonoBehaviour, ITreeElementController
     TreeController ITreeElementController.TreeController => this;
 
     private CameraController cameraController;
-    private SceneSettings SceneSettings => sceneSettings.Value;
-    private readonly Lazy<SceneSettings> sceneSettings 
-        = new Lazy<SceneSettings>(() => GameObject.Find("SceneSettings").GetComponent<SceneSettings>());
     private SphereCollider FogDestroyer // Using lazy here proves to be dangerous
     {
         get
@@ -60,7 +56,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     void Start()
     {
-        if (SceneSettings.currentScene == SceneType.FloatingTree)
+        if (SceneSettings.Instance.currentScene == SceneSettings.SceneType.FloatingTree)
         {
             cameraController = GameObject.Find("Camera").GetComponent<CameraController>();
         }
@@ -68,7 +64,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     void Update()
     {
-        if (SceneSettings.currentScene == SceneType.FloatingTree || SceneSettings.currentScene == SceneType.TreeOnACliff)
+        if (SceneSettings.Instance.currentScene == SceneSettings.SceneType.FloatingTree || SceneSettings.Instance.currentScene == SceneSettings.SceneType.TreeOnACliff)
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
@@ -223,7 +219,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
             furthestBranch = branchDistanceFromRoot;
         }
 
-        if (SceneSettings.currentScene == SceneType.FloatingTree)
+        if (SceneSettings.Instance.currentScene == SceneSettings.SceneType.FloatingTree)
         {
             UpdateBranchesText();
 
@@ -254,7 +250,7 @@ public class TreeController : MonoBehaviour, ITreeElementController
 
     private void UpdateBranchesText()
     {
-        if (branchesCounterText != null && SceneSettings.currentScene == SceneType.FloatingTree)
+        if (branchesCounterText != null && SceneSettings.Instance.currentScene == SceneSettings.SceneType.FloatingTree)
         {
             branchesCounterText.text = "Branches: " + numberOfBranches;
         }
